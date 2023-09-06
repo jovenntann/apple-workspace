@@ -1,0 +1,64 @@
+{
+  "name": "apple-workspace",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/apple-workspace/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/apple-workspace",
+        "main": "apps/apple-workspace/src/main.ts",
+        "tsConfig": "apps/apple-workspace/tsconfig.app.json",
+        "assets": ["apps/apple-workspace/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/apple-workspace/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "apple-workspace:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "apple-workspace:build:development"
+        },
+        "production": {
+          "buildTarget": "apple-workspace:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/apple-workspace/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/apple-workspace/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
