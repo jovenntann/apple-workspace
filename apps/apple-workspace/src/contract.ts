@@ -36,6 +36,7 @@ export const contract = c.router({
         path: '/posts',
         responses: {
             200: c.type<{ posts: Post[]; total: number }>(),
+            201: c.type<{ posts: Post[]; total: number }>(),
         },
         headers: z.object({
             pagination: z.string().optional(),
