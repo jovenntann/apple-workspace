@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {},
+    // Library: ts-rest/nest 
+    // Enable strict in your tsconfig.json! This is required as part of Zod
+    // If you don't enable strict mode, ts-rest will still work, but you may face performance issues #162
+    "strict": true,
   },
   "exclude": ["node_modules", "tmp"]
 }
