@@ -17,6 +17,9 @@ dependencies:
   '@ts-rest/core':
     specifier: ^3.30.1
     version: 3.30.1(zod@3.22.2)
+  '@ts-rest/nest':
+    specifier: ^3.30.1
+    version: 3.30.1(@nestjs/common@10.2.4)(@nestjs/core@10.2.4)(@ts-rest/core@3.30.1)(rxjs@7.8.1)(zod@3.22.2)
   axios:
     specifier: ^1.0.0
     version: 1.5.0
@@ -2566,6 +2569,25 @@ packages:
       zod:
         optional: true
     dependencies:
+      zod: 3.22.2
+    dev: false
+
+  /@ts-rest/nest@3.30.1(@nestjs/common@10.2.4)(@nestjs/core@10.2.4)(@ts-rest/core@3.30.1)(rxjs@7.8.1)(zod@3.22.2):
+    resolution: {integrity: sha512-RG3rFMPFiK9ExFrKKqaHxXBxzjFP9YnEnFI6kQSW7gT/8rJc/KfFRUTD6blB+TLKkUVtrJ3f5nMleoRx97Hygw==}
+    peerDependencies:
+      '@nestjs/common': ^9.0.0 || ^10.0.0
+      '@nestjs/core': ^9.0.0 || ^10.0.0
+      '@ts-rest/core': 3.30.1
+      rxjs: ^7.1.0
+      zod: ^3.21.0
+    peerDependenciesMeta:
+      zod:
+        optional: true
+    dependencies:
+      '@nestjs/common': 10.2.4(reflect-metadata@0.1.13)(rxjs@7.8.1)
+      '@nestjs/core': 10.2.4(@nestjs/common@10.2.4)(@nestjs/platform-express@10.2.4)(reflect-metadata@0.1.13)(rxjs@7.8.1)
+      '@ts-rest/core': 3.30.1(zod@3.22.2)
+      rxjs: 7.8.1
       zod: 3.22.2
     dev: false
 

@@ -9,6 +9,7 @@
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
     "@ts-rest/core": "^3.30.1",
+    "@ts-rest/nest": "^3.30.1",
     "axios": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
