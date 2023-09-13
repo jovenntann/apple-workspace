@@ -25,7 +25,7 @@ export class BackendServiceProductsService {
       GSI1PK: createProductDto.productCategory,
       GSI1SK: createProductDto.productName,
     }
-    const createdProduct = await this.productTable.create(product);
+    const createdProduct: ProductType = await this.productTable.create(product);
     return this.convertToDto(createdProduct);
   }
 
