@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { DynamoDbService } from './dynamodb-onetable.service';
 
 @Module({
-  controllers: [],
-  providers: [DynamoDbService],
+  providers: [DynamoDbService, ConfigService],
   exports: [DynamoDbService],
 })
 export class DynamodbOnetableModule {}
