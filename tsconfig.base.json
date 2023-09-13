@@ -15,14 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@apple/backend/services/products": [
-        "libs/backend/services/products/src/index.ts"
-      ],
       "@apple/backend/dynamodb-onetable": [
         "libs/backend/dynamodb-onetable/src/index.ts"
+      ],
+      "@apple/backend/services/products": [
+        "libs/backend/services/products/src/index.ts"
       ]
     },
-    "strictPropertyInitialization": false,
+    "strictPropertyInitialization": false
   },
   "exclude": ["node_modules", "tmp"]
 }
