@@ -21,7 +21,8 @@
       "@apple/backend/dynamodb-onetable": [
         "libs/backend/dynamodb-onetable/src/index.ts"
       ]
-    }
+    },
+    "strictPropertyInitialization": false,
   },
   "exclude": ["node_modules", "tmp"]
 }
