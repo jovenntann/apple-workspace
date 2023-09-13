@@ -18,7 +18,7 @@
       "@apple/backend/services/products": [
         "libs/backend/services/products/src/index.ts"
       ],
-      "@apple/dynamodb-onetable": [
+      "@apple/backend/dynamodb-onetable": [
         "libs/backend/dynamodb-onetable/src/index.ts"
       ]
     }
