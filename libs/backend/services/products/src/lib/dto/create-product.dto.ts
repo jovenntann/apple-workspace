@@ -1,12 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsString,
-  MinLength,
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, MinLength } from 'class-validator';
+import { ProductType } from '@apple/backend/dynamodb-onetable'; // Adjust the import path accordingly
 
-export class CreateProductDto {
+export class CreateProductDto implements Partial<ProductType> {
   @IsString()
   @IsNotEmpty()
   @MinLength(3)

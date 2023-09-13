@@ -5,8 +5,9 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
+import { ProductType } from '@apple/backend/dynamodb-onetable';
 
-export class UpdateProductDto {
+export class UpdateProductDto implements Partial<ProductType> {
   @IsString()
   @IsOptional()
   @MinLength(3)

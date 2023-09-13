@@ -30,4 +30,4 @@ export class DynamoDbService {
   }
 }
 
-export type UserType = Entity<typeof Schema.models.Product>;
+export type ProductType = Entity<typeof Schema.models.Product>;
