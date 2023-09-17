@@ -26,10 +26,10 @@ export class BackendServiceProductsService {
       GSI1SK: createProductType.productName,
     }
     const createdProduct: ProductType = await this.productTable.create(product);
-    return this.convertToDto(createdProduct);
+    return this.convertToReadProductDTO(createdProduct);
   }
 
-  private async convertToDto(productType: ProductType): Promise<ReadProductDTO> {
+  private async convertToReadProductDTO(productType: ProductType): Promise<ReadProductDTO> {
     return {
       productId: productType.productId,
       productName: productType.productName,
