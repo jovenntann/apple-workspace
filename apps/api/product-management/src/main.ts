@@ -51,7 +51,7 @@ async function bootstrap() {
   Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
   
   // Log Swagger endpoint message
-  Logger.log(`🚀 Swagger UI available at: http://localhost:${port}/${globalPrefix}/docs`);
+  Logger.log(`🚀 Swagger UI available at: http://localhost:${port}/docs`);
 }
 
 bootstrap();
