@@ -1,37 +1,11 @@
-import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsNumber,
-  IsOptional,
-  IsString,
-  MinLength,
-} from 'class-validator';
-import { ProductType } from '@apple/backend/dynamodb-onetable';
+import { z } from 'zod';
 
-export class UpdateProductDto implements Partial<ProductType> {
-  @IsString()
-  @IsOptional()
-  @MinLength(3)
-  @ApiProperty()
-  productCategory?: string;
+export const UpdateProductDtoSchema = z.object({
+  productCategory: z.string().optional(),
+  productName: z.string().optional(),
+  price: z.number().optional(),
+  description: z.string().optional(),
+  stock: z.number().optional(),
+});
 
-  @IsString()
-  @IsOptional()
-  @MinLength(3)
-  @ApiProperty()
-  productName?: string;
-
-  @IsNumber()
-  @IsOptional()
-  @ApiProperty()
-  price?: number;
-
-  @IsString()
-  @IsOptional()
-  @ApiProperty()
-  description?: string;
-
-  @IsNumber()
-  @IsOptional()
-  @ApiProperty()
-  stock?: number;
-}
+export type UpdateProductDto = z.infer<typeof UpdateProductDtoSchema>;

@@ -22,7 +22,8 @@
         "libs/backend/services/products/src/index.ts"
       ]
     },
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "strict": true
   },
   "exclude": ["node_modules", "tmp"]
 }

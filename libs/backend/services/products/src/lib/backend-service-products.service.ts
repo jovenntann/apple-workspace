@@ -1,5 +1,5 @@
-import { CreateProductDto } from './dto/create-product.dto';
-import { ReadProductDto } from './dto/read-product.dto';
+import { CreateProductType } from './dto/create-product.dto';
+import { ReadProductDTO } from './dto/read-product.dto';
 import { Injectable } from '@nestjs/common';
 import { DynamoDbService, ProductType } from '@apple/backend/dynamodb-onetable';
 
@@ -14,22 +14,22 @@ export class BackendServiceProductsService {
     this.productTable = this.dynamoDbService.dynamoDbMainTable().getModel('Product');
   }
 
-  async createProduct(createProductDto: CreateProductDto): Promise<ReadProductDto> {
+  async createProduct(createProductType: CreateProductType): Promise<ReadProductDTO> {
     const product: ProductType = {
-      productName: createProductDto.productName,
-      productCategory: createProductDto.productCategory,
-      description: createProductDto.description,
-      price: createProductDto.price,
-      stock: createProductDto.stock,
-      SK: createProductDto.productCategory,
-      GSI1PK: createProductDto.productCategory,
-      GSI1SK: createProductDto.productName,
+      productName: createProductType.productName,
+      productCategory: createProductType.productCategory,
+      description: createProductType.description,
+      price: createProductType.price,
+      stock: createProductType.stock,
+      SK: createProductType.productCategory,
+      GSI1PK: createProductType.productCategory,
+      GSI1SK: createProductType.productName,
     }
     const createdProduct: ProductType = await this.productTable.create(product);
     return this.convertToDto(createdProduct);
   }
 
-  private async convertToDto(productType: ProductType): Promise<ReadProductDto> {
+  private async convertToDto(productType: ProductType): Promise<ReadProductDTO> {
     return {
       productId: productType.productId,
       productName: productType.productName,

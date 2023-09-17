@@ -1,32 +1,33 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString, MinLength } from 'class-validator';
-import { ProductType } from '@apple/backend/dynamodb-onetable'; // Adjust the import path accordingly
+import { z } from 'zod';
+import { createZodDto } from 'nestjs-zod';
 
-export class CreateProductDto implements Partial<ProductType> {
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(3)
-  @ApiProperty()
-  productCategory: string;
+export const CreateProductSchema = z.object({
+  productCategory: z.string({
+    description: 'The category of the product',
+    required_error: 'Product category is required',
+    invalid_type_error: 'Product category must be a string',
+  }).nonempty('Product category cannot be empty'),
+  productName: z.string({
+    description: 'The name of the product',
+    required_error: 'Product name is required',
+    invalid_type_error: 'Product name must be a string',
+  }).nonempty('Product name cannot be empty'),
+  price: z.number({
+    description: 'The price of the product',
+    required_error: 'Price is required',
+    invalid_type_error: 'Price must be a number',
+  }).min(0, 'Price cannot be negative'),
+  description: z.string({
+    description: 'The description of the product',
+    invalid_type_error: 'Description must be a string',
+  }).optional(),
+  stock: z.number({
+    description: 'The stock of the product',
+    required_error: 'Stock is required',
+    invalid_type_error: 'Stock must be a number',
+  }).min(0, 'Stock cannot be negative'),
+});
 
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(3)
-  @ApiProperty()
-  productName: string;
 
-  @IsNumber()
-  @IsNotEmpty()
-  @ApiProperty()
-  price: number;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  description: string;
-
-  @IsNumber()
-  @IsNotEmpty()
-  @ApiProperty()
-  stock: number;
-}
+export type CreateProductType = z.infer<typeof CreateProductSchema>;
+export class CreateProductDTO extends createZodDto(CreateProductSchema) {}

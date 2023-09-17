@@ -3,8 +3,8 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
 import {
   BackendServiceProductsService,
-  CreateProductDto,
-  ReadProductDto
+  CreateProductDTO,
+  ReadProductDTO,
 } from '@apple/backend/services/products';
 
 @Controller('products')
@@ -16,8 +16,8 @@ export class ProductsController {
   ) {}
 
   @Post()
-  @ApiCreatedResponse({ type: ReadProductDto })
-  create(@Body() createProductDto: CreateProductDto) {
+  @ApiCreatedResponse({ type: ReadProductDTO })
+  create(@Body() createProductDto: CreateProductDTO) {
     return this.backendServiceProductsService.createProduct(createProductDto);
   }
 }
