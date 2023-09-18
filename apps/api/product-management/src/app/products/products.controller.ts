@@ -5,6 +5,7 @@ import {
   BackendServiceProductsService,
   CreateProductDTO,
   ReadProductDTO,
+  ReadProductsDTO,
   FindAllQueryDTO
 } from '@apple/backend/services/products';
 
@@ -23,7 +24,7 @@ export class ProductsController {
   }
 
   @Get()
-  @ApiOkResponse({ type: [ReadProductDTO] })
+  @ApiOkResponse({ type: ReadProductsDTO })
   findAll(@Query() query: FindAllQueryDTO) {
     return this.backendServiceProductsService.findAllProducts(query.limit, query.direction, query.cursorPointer);
   }
