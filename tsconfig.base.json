@@ -18,6 +18,9 @@
       "@apple/backend/dynamodb-onetable": [
         "libs/backend/dynamodb-onetable/src/index.ts"
       ],
+      "@apple/backend/services/categories": [
+        "libs/backend/services/categories/src/index.ts"
+      ],
       "@apple/backend/services/products": [
         "libs/backend/services/products/src/index.ts"
       ]
