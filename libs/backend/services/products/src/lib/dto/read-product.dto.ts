@@ -8,6 +8,7 @@ export const ReadProductSchema = z.object({
   price: z.number(),
   description: z.string().optional(),
   stock:z.number(),
+  categoryId: z.string(),
   created: z.date().optional(),
   updated: z.date().optional(),
 });

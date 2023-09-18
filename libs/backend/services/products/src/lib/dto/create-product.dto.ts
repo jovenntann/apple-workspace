@@ -26,6 +26,11 @@ export const CreateProductSchema = z.object({
     required_error: 'Stock is required',
     invalid_type_error: 'Stock must be a number',
   }).min(0, 'Stock cannot be negative'),
+  categoryId: z.string({
+    description: 'The category ID of the product',
+    required_error: 'Category ID is required',
+    invalid_type_error: 'Category ID must be a string',
+  }).nonempty('Category ID cannot be empty'),
 });
 
 

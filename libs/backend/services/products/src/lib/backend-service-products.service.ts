@@ -21,6 +21,7 @@ export class BackendServiceProductsService {
       description: createProductType.description,
       price: createProductType.price,
       stock: createProductType.stock,
+      categoryId: createProductType.categoryId,
     }
     const createdProduct: ProductType = await this.productTable.create(product);
     return this.convertToReadProductDTO(createdProduct);
@@ -34,6 +35,7 @@ export class BackendServiceProductsService {
       description: productType.description,
       price: productType.price,
       stock: productType.stock,
+      categoryId: productType.categoryId,
       created: productType.created,
       updated: productType.updated,
     };
