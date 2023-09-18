@@ -1,6 +1,6 @@
 import { CreateProductType } from './dto/create-product.dto';
 import { ReadProductDTO } from './dto/read-product.dto';
-import { PageDto } from './dto/page.dto';
+import { PaginatedDataDTO } from './dto/paginated-data.dto';
 import { Injectable } from '@nestjs/common';
 import { DynamoDbService, ProductType, createDynamoDbOptionWithPKSKIndex } from '@apple/backend/dynamodb-onetable';
 
@@ -31,7 +31,7 @@ export class BackendServiceProductsService {
     limit: number,
     direction: string,
     cursorPointer: string
-  ): Promise<PageDto<ReadProductDTO>> {
+  ): Promise<PaginatedDataDTO<ReadProductDTO>> {
     const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
       limit,
       'GSI1', // This is an example it could be any other GSI or empty string
@@ -40,7 +40,7 @@ export class BackendServiceProductsService {
     );
     const products = await this.productTable.find({}, dynamoDbOption);
     const convertedProductsToDTO = await Promise.all(products.map(this.convertToReadProductDTO));
-    return new PageDto(convertedProductsToDTO, products.next, products.prev);
+    return new PaginatedDataDTO(convertedProductsToDTO, products.next, products.prev);
   }
 
   private async convertToReadProductDTO(productType: ProductType): Promise<ReadProductDTO> {

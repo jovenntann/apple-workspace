@@ -2,10 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsArray } from 'class-validator';
 
 /**
- * PageDto is a generic class that represents a paginated response.
+ * PaginatedDataDTO is a generic class that represents a paginated response.
  * It contains an array of data and pointers to the next and previous pages.
  */
-export class PageDto<DataType> {
+export class PaginatedDataDTO<DataType> {
   @IsArray()
   @ApiProperty({ isArray: true, description: 'Array of data items of the specified type' })
   readonly data: DataType[];
@@ -17,7 +17,7 @@ export class PageDto<DataType> {
   prevCursorPointer: string;
 
   /**
-   * Constructor to initialize the PageDto instance.
+   * Constructor to initialize the PaginatedDataDTO instance.
    * 
    * @param data - Array of data items of the specified type
    * @param nextCursorPointer - Cursor pointer to the next page

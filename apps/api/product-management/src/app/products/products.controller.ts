@@ -6,7 +6,7 @@ import {
   CreateProductDTO,
   ReadProductDTO,
   ReadProductsDTO,
-  FindAllQueryDTO
+  PaginationQueryDTO
 } from '@apple/backend/services/products';
 
 @Controller('products')
@@ -25,7 +25,7 @@ export class ProductsController {
 
   @Get()
   @ApiOkResponse({ type: ReadProductsDTO })
-  findAll(@Query() query: FindAllQueryDTO) {
+  findAll(@Query() query: PaginationQueryDTO) {
     return this.backendServiceProductsService.findAllProducts(query.limit, query.direction, query.cursorPointer);
   }
 }
