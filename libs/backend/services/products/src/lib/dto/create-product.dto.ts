@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { createZodDto } from 'nestjs-zod';
 
 export const CreateProductSchema = z.object({
-
   productName: z.string({
     description: 'The name of the product',
     required_error: 'Product name is required',
@@ -30,10 +29,12 @@ export const CreateProductSchema = z.object({
     description: 'The category ID of the product',
     required_error: 'Category ID is required',
     invalid_type_error: 'Category ID must be a string',
-  }).nonempty('Category ID cannot be empty'),
-  
+  })
+  .nonempty('Category ID cannot be empty')
+  .refine(value => /^[0-9A-Z]{26}$/.test(value), {
+    message: 'Category ID must be a valid ULID',
+  }),
 });
-
 
 export type CreateProductType = z.infer<typeof CreateProductSchema>;
 export class CreateProductDTO extends createZodDto(CreateProductSchema) {}
