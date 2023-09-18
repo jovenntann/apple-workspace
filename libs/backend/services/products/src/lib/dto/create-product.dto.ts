@@ -3,12 +3,6 @@ import { createZodDto } from 'nestjs-zod';
 
 export const CreateProductSchema = z.object({
 
-  productCategory: z.string({
-    description: 'The category of the product',
-    required_error: 'Product category is required',
-    invalid_type_error: 'Product category must be a string',
-  }).nonempty('Product category cannot be empty'),
-
   productName: z.string({
     description: 'The name of the product',
     required_error: 'Product name is required',

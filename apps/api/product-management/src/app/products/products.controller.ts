@@ -1,5 +1,5 @@
-import { Controller, Post, Body } from '@nestjs/common';
-import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, } from '@nestjs/common';
+import { ApiBearerAuth, ApiOkResponse, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
 import {
   BackendServiceProductsService,
@@ -19,5 +19,11 @@ export class ProductsController {
   @ApiCreatedResponse({ type: ReadProductDTO })
   create(@Body() createProductDto: CreateProductDTO) {
     return this.backendServiceProductsService.createProduct(createProductDto);
+  }
+
+  @Get()
+  @ApiOkResponse({ type: [ReadProductDTO] })
+  findAll() {
+    return this.backendServiceProductsService.findAllProducts();
   }
 }

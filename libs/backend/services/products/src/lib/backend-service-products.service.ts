@@ -17,7 +17,6 @@ export class BackendServiceProductsService {
   async createProduct(createProductType: CreateProductType): Promise<ReadProductDTO> {
     const product: ProductType = {
       productName: createProductType.productName,
-      productCategory: createProductType.productCategory,
       description: createProductType.description,
       price: createProductType.price,
       stock: createProductType.stock,
@@ -27,11 +26,15 @@ export class BackendServiceProductsService {
     return this.convertToReadProductDTO(createdProduct);
   }
 
+  async findAllProducts(): Promise<ReadProductDTO[]> {
+    const products = await this.productTable.find();
+    return Promise.all(products.map(this.convertToReadProductDTO));
+  }
+
   private async convertToReadProductDTO(productType: ProductType): Promise<ReadProductDTO> {
     return {
       productId: productType.productId,
       productName: productType.productName,
-      productCategory: productType.productCategory,
       description: productType.description,
       price: productType.price,
       stock: productType.stock,

@@ -16,7 +16,6 @@ export const Schema = {
       GSI1PK: { type: String, value: 'PRODUCT' },
       GSI1SK: { type: String, value: 'CATEGORY#${categoryId}' }, // To query all Products by Category ID and #CATEGORY would help on easily identifying that this is a category
       productId: { type: String, generate: 'ulid', },
-      productCategory: { type: String, required: true },
       productName: { type: String, required: true },
       price: { type: Number, required: true },
       description: { type: String },

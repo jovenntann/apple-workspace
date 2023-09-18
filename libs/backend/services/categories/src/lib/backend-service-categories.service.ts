@@ -23,6 +23,11 @@ export class BackendServiceCategoriesService {
     return this.convertToReadCategoryDTO(createdCategory);
   }
 
+  async findAllCategories(): Promise<ReadCategoryDTO[]> {
+    const categories = await this.categoryTable.find();
+    return Promise.all(categories.map(this.convertToReadCategoryDTO));
+  }
+
   private async convertToReadCategoryDTO(categoryType: CategoryType): Promise<ReadCategoryDTO> {
     return {
       categoryId: categoryType.categoryId,
