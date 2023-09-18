@@ -1,7 +1,8 @@
 import { CreateProductType } from './dto/create-product.dto';
 import { ReadProductDTO } from './dto/read-product.dto';
+import { PageDto } from './dto/page.dto';
 import { Injectable } from '@nestjs/common';
-import { DynamoDbService, ProductType } from '@apple/backend/dynamodb-onetable';
+import { DynamoDbService, ProductType, createDynamoDbOptionWithPKSKIndex } from '@apple/backend/dynamodb-onetable';
 
 @Injectable()
 export class BackendServiceProductsService {
@@ -26,9 +27,20 @@ export class BackendServiceProductsService {
     return this.convertToReadProductDTO(createdProduct);
   }
 
-  async findAllProducts(): Promise<ReadProductDTO[]> {
-    const products = await this.productTable.find();
-    return Promise.all(products.map(this.convertToReadProductDTO));
+  async findAllProducts(
+    limit: number,
+    direction: string,
+    cursorPointer?: string
+  ): Promise<PageDto<ReadProductDTO>> {
+    const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
+      limit,
+      'GSI1',
+      direction,
+      cursorPointer
+    );
+    const products = await this.productTable.find({}, dynamoDbOption);
+    const convertedProductsToDTO = await Promise.all(products.map(this.convertToReadProductDTO));
+    return new PageDto(convertedProductsToDTO, products.next, products.prev);
   }
 
   private async convertToReadProductDTO(productType: ProductType): Promise<ReadProductDTO> {

@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { ApiBearerAuth, ApiOkResponse, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
 import {
   BackendServiceProductsService,
   CreateProductDTO,
   ReadProductDTO,
+  FindAllQueryDTO
 } from '@apple/backend/services/products';
 
 @Controller('products')
@@ -23,7 +24,7 @@ export class ProductsController {
 
   @Get()
   @ApiOkResponse({ type: [ReadProductDTO] })
-  findAll() {
-    return this.backendServiceProductsService.findAllProducts();
+  findAll(@Query() query: FindAllQueryDTO) {
+    return this.backendServiceProductsService.findAllProducts(query.limit, query.direction, query.cursorPointer);
   }
 }
