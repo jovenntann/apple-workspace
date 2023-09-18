@@ -8,7 +8,7 @@ export class BackendServiceProductsService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private productTable: any = null;
 
-  constructor(
+  constructor( 
     private readonly dynamoDbService: DynamoDbService,
   ) {
     this.productTable = this.dynamoDbService.dynamoDbMainTable().getModel('Product');
@@ -21,9 +21,6 @@ export class BackendServiceProductsService {
       description: createProductType.description,
       price: createProductType.price,
       stock: createProductType.stock,
-      SK: createProductType.productCategory,
-      GSI1PK: createProductType.productCategory,
-      GSI1SK: createProductType.productName,
     }
     const createdProduct: ProductType = await this.productTable.create(product);
     return this.convertToReadProductDTO(createdProduct);
@@ -37,6 +34,8 @@ export class BackendServiceProductsService {
       description: productType.description,
       price: productType.price,
       stock: productType.stock,
+      created: productType.created,
+      updated: productType.updated,
     };
   }
 }

@@ -11,16 +11,20 @@ export const Schema = {
     },
     models: {
       Product: {
-        PK: { type: String, value: 'PRODUCT#${productId}' },
-        SK: { type: String, value: '${productCategory}' },
+        PK: { type: String, value: 'PRODUCT' },
+        // Since Product ID is in ULID format, we can use on sorting
+        SK: { type: String, value: 'PRODUCT#${productId}' },
         productId: { type: String, generate: 'ulid', },
         productCategory: { type: String, required: true },
         productName: { type: String, required: true },
         price: { type: Number, required: true },
         description: { type: String },
         stock: { type: Number, required: true },
-        GSI1PK: { type: String, value: '${productCategory}' },
-        GSI1SK: { type: String, value: '${productName}' },
+        // Get all the Products by Category Name
+        GSI1PK: { type: String, value: 'PRODUCT' },
+        GSI1SK: { type: String, value: 'PRODUCT#${productCategory}' },
+        created: { type: Date, timestamp: true },
+        updated: { type: Date, timestamp: true },
       },
     },
     params: {
