@@ -25,8 +25,8 @@ export const ReadProductsSchema = z.object({
   prevCursorPointer: CursorPointerSchema.optional(),
 });
 
-export type ProductItemType = z.infer<typeof ReadProductSchema>;
+export type ReadProductType = z.infer<typeof ReadProductSchema>;
 export class ReadProductDTO extends createZodDto(ReadProductSchema) {}
 
-export type ReadProductType = z.infer<typeof ReadProductSchema>;
+export type ReadProductsType = z.infer<typeof ReadProductsSchema>;
 export class ReadProductsDTO extends createZodDto(ReadProductsSchema) {}
