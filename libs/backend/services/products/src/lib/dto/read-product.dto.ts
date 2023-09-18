@@ -15,8 +15,8 @@ export const ReadProductSchema = z.object({
 const CursorPointerSchema = z.object({
   SK: z.string(),
   PK: z.string(),
-  GSI1PK: z.string().optional(),
-  GSI1SK: z.string().optional(),
+  GSI1PK: z.string().optional(), // This is an example it could be any other GSI
+  GSI1SK: z.string().optional(), // This is an example it could be any other GSI
 });
 
 export const ReadProductsSchema = z.object({

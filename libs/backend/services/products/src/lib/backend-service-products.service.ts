@@ -30,11 +30,11 @@ export class BackendServiceProductsService {
   async findAllProducts(
     limit: number,
     direction: string,
-    cursorPointer?: string
+    cursorPointer: string
   ): Promise<PageDto<ReadProductDTO>> {
     const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
       limit,
-      'GSI1',
+      'GSI1', // This is an example it could be any other GSI or empty string
       direction,
       cursorPointer
     );

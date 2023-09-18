@@ -10,6 +10,6 @@ export class FindAllQueryDTO {
     direction: string;
   
     @ApiProperty({ type: String, required: false })
-    cursorPointer?: string;
+    cursorPointer: string;
   }
   
