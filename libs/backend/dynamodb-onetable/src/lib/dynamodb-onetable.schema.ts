@@ -15,6 +15,8 @@ export const Schema = {
       SK: { type: String, value: '${productId}' },
       GSI1PK: { type: String, value: 'PRODUCT' },
       GSI1SK: { type: String, value: 'CATEGORY#${categoryId}' }, // To query all Products by Category ID and #CATEGORY would help on easily identifying that this is a category
+      GSI2PK: { type: String, value: 'PRODUCT' },
+      GSI2SK: { type: Date, value: '${created}' }, // To query all products between date ranges
       productId: { type: String, generate: 'ulid', },
       productName: { type: String, required: true },
       price: { type: Number, required: true },
