@@ -3,14 +3,15 @@ import { APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductsController } from './products/products.controller';
-import { BackendServiceProductsModule } from '@apple/backend/services/products';
-import { CategoriesController } from './categories/categories.controller';
-import { BackendServiceCategoriesModule } from '@apple/backend/services/categories';
+import { ProductsModule } from './products/products.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
-  imports: [BackendServiceProductsModule, BackendServiceCategoriesModule],
-  controllers: [AppController, ProductsController, CategoriesController],
+  imports: [
+    ProductsModule,
+    CategoriesModule,
+  ],
+  controllers: [AppController],
   providers: [
     {
       provide: APP_PIPE,
