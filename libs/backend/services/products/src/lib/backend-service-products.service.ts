@@ -43,6 +43,32 @@ export class BackendServiceProductsService {
     return new PaginatedDataDTO(convertedProductsToDTO, products.next, products.prev);
   }
 
+  async findProductsByDateRange(
+    startDate: Date,
+    endDate: Date,
+    limit: number,
+    direction: string,
+    cursorPointer?: string
+  ): Promise<PaginatedDataDTO<ReadProductDTO>> {
+    const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
+      limit,
+      'GSI2', // Using GSI2 which is indexed by the created date
+      direction,
+      cursorPointer
+    );
+
+    const products = await this.productTable.find(
+      {
+        'GSI2PK': 'PRODUCT', // Assuming GSI2PK is mapped to a constant 'PRODUCT' string
+        'GSI2SK': { between: [startDate, endDate] }, // Querying products created between startDate and endDate
+      },
+      dynamoDbOption
+    );
+
+    const convertedProductsToDTO = await Promise.all(products.map(this.convertToReadProductDTO));
+    return new PaginatedDataDTO(convertedProductsToDTO, products.next, products.prev);
+  }
+
   private async convertToReadProductDTO(productType: ProductType): Promise<ReadProductDTO> {
     return {
       productId: productType.productId,

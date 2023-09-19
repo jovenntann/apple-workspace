@@ -5,3 +5,4 @@ export * from './lib/dto/create-product.dto';
 export * from './lib/dto/update-product.dto';
 export * from './lib/dto/pagination-query.dto';
 export * from './lib/dto/paginated-data.dto';
+export * from './lib/dto/find-products-by-date-range.dto';

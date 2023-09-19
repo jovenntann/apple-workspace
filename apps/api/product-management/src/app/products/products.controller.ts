@@ -6,7 +6,8 @@ import {
   CreateProductDTO,
   ReadProductDTO,
   ReadProductsDTO,
-  PaginationQueryDTO
+  PaginationQueryDTO,
+  FindProductsByDateRangeDTO
 } from '@apple/backend/services/products';
 
 @Controller('products')
@@ -27,5 +28,11 @@ export class ProductsController {
   @ApiOkResponse({ type: ReadProductsDTO })
   findAll(@Query() query: PaginationQueryDTO) {
     return this.backendServiceProductsService.findAllProducts(query.limit, query.direction, query.cursorPointer);
+  }
+
+  @Get('by-date-range')
+  @ApiOkResponse({ type: ReadProductsDTO })
+  findByDateRange(@Query() query: FindProductsByDateRangeDTO) {
+    return this.backendServiceProductsService.findProductsByDateRange(query.startDate, query.endDate, query.limit, query.direction, query.cursorPointer);
   }
 }
