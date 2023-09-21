@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, ValidationPipe } from '@nestjs/common';
 import { ApiBearerAuth, ApiOkResponse, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
 import {
@@ -26,13 +26,13 @@ export class ProductsController {
 
   @Get()
   @ApiOkResponse({ type: ReadProductsDTO })
-  findAll(@Query() query: PaginationQueryDTO) {
-    return this.backendServiceProductsService.findAllProducts(query.limit, query.direction, query.cursorPointer);
+  findAll(@Query(new ValidationPipe({ transform: true })) query: PaginationQueryDTO) {
+    return this.backendServiceProductsService.findAllProducts(query);
   }
 
   @Get('by-date-range')
   @ApiOkResponse({ type: ReadProductsDTO })
-  findByDateRange(@Query() query: FindProductsByDateRangeDTO) {
-    return this.backendServiceProductsService.findProductsByDateRange(query.startDate, query.endDate, query.limit, query.direction, query.cursorPointer);
+  findByDateRange(@Query(new ValidationPipe({ transform: true })) query: FindProductsByDateRangeDTO) {
+    return this.backendServiceProductsService.findProductsByDateRange(query);
   }
 }

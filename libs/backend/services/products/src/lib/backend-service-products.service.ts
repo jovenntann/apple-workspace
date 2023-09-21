@@ -1,6 +1,8 @@
 import { CreateProductType } from './dto/create-product.dto';
 import { ReadProductDTO } from './dto/read-product.dto';
 import { PaginatedDataDTO } from './dto/paginated-data.dto';
+import { FindProductsByDateRangeDTO } from './dto/find-products-by-date-range.dto';
+import { PaginationQueryDTO } from './dto/pagination-query.dto';
 import { Injectable } from '@nestjs/common';
 import { DynamoDbService, ProductType, createDynamoDbOptionWithPKSKIndex } from '@apple/backend/dynamodb-onetable';
 
@@ -27,40 +29,36 @@ export class BackendServiceProductsService {
     return this.convertToReadProductDTO(createdProduct);
   }
 
-  async findAllProducts(
-    limit: number,
-    direction: string,
-    cursorPointer: string
-  ): Promise<PaginatedDataDTO<ReadProductDTO>> {
+  async findAllProducts(filters: PaginationQueryDTO): Promise<PaginatedDataDTO<ReadProductDTO>> {
     const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
-      limit,
-      'GSI1', // This is an example it could be any other GSI or empty string
-      direction,
-      cursorPointer
+      filters.limit,
+      'GSI2', // This is an example it could be any other GSI or empty string
+      filters.direction,
+      filters.cursorPointer,
+      filters.reverse
     );
+    console.log(dynamoDbOption)
     const products = await this.productTable.find({}, dynamoDbOption);
     const convertedProductsToDTO = await Promise.all(products.map(this.convertToReadProductDTO));
     return new PaginatedDataDTO(convertedProductsToDTO, products.next, products.prev);
   }
 
-  async findProductsByDateRange(
-    startDate: Date,
-    endDate: Date,
-    limit: number,
-    direction: string,
-    cursorPointer?: string
-  ): Promise<PaginatedDataDTO<ReadProductDTO>> {
+  async findProductsByDateRange(filters: FindProductsByDateRangeDTO): Promise<PaginatedDataDTO<ReadProductDTO>> {
+    console.log(filters.reverse);
     const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
-      limit,
+      filters.limit,
       'GSI2', // Using GSI2 which is indexed by the created date
-      direction,
-      cursorPointer
+      filters.direction,
+      filters.cursorPointer,
+      filters.reverse
     );
+
+    console.log(dynamoDbOption)
 
     const products = await this.productTable.find(
       {
         'GSI2PK': 'PRODUCT', // Assuming GSI2PK is mapped to a constant 'PRODUCT' string
-        'GSI2SK': { between: [startDate, endDate] }, // Querying products created between startDate and endDate
+        'GSI2SK': { between: [filters.startDate, filters.endDate] }, // Querying products created between startDate and endDate
       },
       dynamoDbOption
     );

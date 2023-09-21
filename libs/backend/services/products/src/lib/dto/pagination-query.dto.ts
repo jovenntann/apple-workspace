@@ -11,4 +11,8 @@ export class PaginationQueryDTO {
 
   @ApiProperty({ type: String, required: false })
   cursorPointer: string;
+
+  @ApiProperty({ type: Boolean, required: true, default: false })
+  @Transform(({ value }) => value === 'true', { toClassOnly: true })
+  reverse: boolean;
 }

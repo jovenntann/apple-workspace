@@ -3,6 +3,7 @@ import { BadRequestException } from '@nestjs/common';
 interface DbOptions {
   limit?: number;
   follow?: boolean;
+  reverse?: boolean;
   /* eslint-disable @typescript-eslint/no-explicit-any */
   [key: string]: any;
   index?: string;
@@ -12,12 +13,13 @@ export function createDynamoDbOptionWithPKSKIndex(
   limit: number,
   indexName?: string,
   direction?: string,
-  cursorPointer?: string
+  cursorPointer?: string,
+  reverse?: boolean
 ): DbOptions {
   const dbOptions: DbOptions = {};
   dbOptions.limit = limit;
   dbOptions.follow = true;
-
+  dbOptions.reverse = reverse ?? false;
   if (direction != null) {
     if (cursorPointer == null) {
       throw new BadRequestException(
