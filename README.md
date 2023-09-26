@@ -74,3 +74,15 @@ To Test Specific Library or App
 ```
 nx test backend-service-products
 ```
+
+## NX Commands
+
+NX Upgrade
+```
+nx migrate latest
+```
+
+Run All Apps
+```
+nx run-many --target=serve --all --maxParallel=100 
+```
