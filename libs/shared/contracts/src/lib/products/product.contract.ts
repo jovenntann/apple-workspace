@@ -36,7 +36,7 @@ const ProductSchema = z.object({
   stock: z.number(),
   categoryId: z.string(),
   created: z.date(),
-  updated: z.date(),
+  updated: z.date()
 });
 
 const ProductResponseSchema = z.object({
@@ -45,35 +45,48 @@ const ProductResponseSchema = z.object({
     SK: z.string(),
     PK: z.string(),
     GSI2PK: z.string(),
-    GSI2SK: z.string(),
+    GSI2SK: z.string()
   }),
   prevCursorPointer: z.object({
     SK: z.string(),
     PK: z.string(),
     GSI2PK: z.string(),
-    GSI2SK: z.string(),
-  }),
+    GSI2SK: z.string()
+  })
 });
 
 const c = initContract();
 
-export const apiProduct = c.router(
-    {
-      findAllProducts: {
-        method: 'GET',
-        path: '/api/products',
-        responses: {
-          200: ProductResponseSchema,
-        },
-        query: z.object({
-          limit: z.string().optional().transform(val => isNaN(Number(val)) ? '10' : val),
-          reverse: z.string().optional().transform(val => val === 'true'),
-          cursorPointer: z.string().optional(),
-          direction: z.string().optional(),
-        }),
-        summary: 'Get products with optional limit and reverse flag',
-        metadata: { roles: ['guest', 'user'] } as const,
-      },
+export const apiProduct = c.router({
+  findAllProducts: {
+    method: 'GET',
+    path: '/api/products',
+    responses: {
+      200: ProductResponseSchema,
+      400: z.object({
+        message: z.string(),
+        error: z.string(),
+        statusCode: z.number()
+      })
     },
-  );
-  
+    query: z.object({
+      limit: z
+        .string()
+        .optional()
+        .transform((val) => (isNaN(Number(val)) ? '10' : val))
+        .refine((val) => Number(val) <= 100, {
+          message: 'Limit must be less than or equal to 100'
+        }),
+      reverse: z
+        .string()
+        .optional()
+        .transform((val) => val === 'true'),
+      cursorPointer: z.string().optional(),
+      direction: z.enum(['prev', 'next']).optional()
+    }),
+    summary: 'Get products with optional limit and reverse flag',
+    description: 'Get products with optional limit and reverse flag',
+    metadata: { roles: ['guest', 'user'] } as const,
+    strictStatusCodes: true
+  }
+});

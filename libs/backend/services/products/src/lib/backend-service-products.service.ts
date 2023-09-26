@@ -39,12 +39,12 @@ export class BackendServiceProductsService {
     const products = await this.productTable.find({}, dynamoDbOption);
     this.logger.log(`Found ${products.length} products`);
 
-    const convertedProductsToDTO = await Promise.all(
+    const convertedProducts = await Promise.all(
       products.map(this.convertToProduct)
     );
 
     return {
-      data: convertedProductsToDTO,
+      data: convertedProducts,
       nextCursorPointer: products.next,
       prevCursorPointer: products.prev
     };

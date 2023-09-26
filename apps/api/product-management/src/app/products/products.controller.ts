@@ -1,14 +1,11 @@
 import { Controller } from '@nestjs/common';
 import { apiProduct } from '@apple/shared/contracts';
 import {
-  nestControllerContract,
   TsRestHandler,
   tsRestHandler
 } from '@ts-rest/nest';
 
 import { BackendServiceProductsService } from '@apple/backend/services/products';
-
-const contract = nestControllerContract(apiProduct);
 
 @Controller()
 export class ProductsController {
@@ -16,13 +13,14 @@ export class ProductsController {
     private readonly backendServiceProductsService: BackendServiceProductsService
   ) {}
 
-  @TsRestHandler(contract, {
-    validateRequestBody: false,
-    validateRequestQuery: true,
-    validateRequestHeaders: false
+  @TsRestHandler(apiProduct, {
+    // TODO: Check if we need to validate the request body, query and headers or is it done by default
+    // validateRequestBody: true,
+    // validateRequestQuery: true,
+    // validateRequestHeaders: true
   })
   async handler() {
-    return tsRestHandler(contract, {
+    return tsRestHandler(apiProduct, {
       findAllProducts: async ({ query }) => {
         const { data, nextCursorPointer, prevCursorPointer } =
           await this.backendServiceProductsService.findAllProducts({
