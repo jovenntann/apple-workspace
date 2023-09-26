@@ -23,7 +23,8 @@
       ],
       "@apple/backend/services/products": [
         "libs/backend/services/products/src/index.ts"
-      ]
+      ],
+      "@apple/shared/dto": ["libs/shared/dto/src/index.ts"]
     },
     "strictPropertyInitialization": false,
     "strict": true
