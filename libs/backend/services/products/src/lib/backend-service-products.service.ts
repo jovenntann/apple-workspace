@@ -3,11 +3,12 @@ import { ReadProductDTO } from './dto/read-product.dto';
 import { PaginatedDataDTO } from './dto/paginated-data.dto';
 import { FindProductsByDateRangeDTO } from './dto/find-products-by-date-range.dto';
 import { PaginationQueryDTO } from './dto/pagination-query.dto';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { DynamoDbService, ProductType, createDynamoDbOptionWithPKSKIndex } from '@apple/backend/dynamodb-onetable';
 
 @Injectable()
 export class BackendServiceProductsService {
+  private readonly logger = new Logger(BackendServiceProductsService.name);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private productTable: any = null;
 
@@ -15,9 +16,12 @@ export class BackendServiceProductsService {
     private readonly dynamoDbService: DynamoDbService,
   ) {
     this.productTable = this.dynamoDbService.dynamoDbMainTable().getModel('Product');
+    this.logger = new Logger(BackendServiceProductsService.name);
+    this.logger.log('BackendServiceProductsService initialized');
   }
 
   async createProduct(createProductType: CreateProductType): Promise<ReadProductDTO> {
+    this.logger.log('createProduct method called');
     const product: ProductType = {
       productName: createProductType.productName,
       description: createProductType.description,
@@ -26,10 +30,12 @@ export class BackendServiceProductsService {
       categoryId: createProductType.categoryId,
     }
     const createdProduct: ProductType = await this.productTable.create(product);
+    this.logger.log(`Product created with id: ${createdProduct.productId}`);
     return this.convertToReadProductDTO(createdProduct);
   }
 
   async findAllProducts(filters: PaginationQueryDTO): Promise<PaginatedDataDTO<ReadProductDTO>> {
+    this.logger.log('findAllProducts method called');
     const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
       filters.limit,
       'GSI2', // This is an example it could be any other GSI or empty string
@@ -37,14 +43,14 @@ export class BackendServiceProductsService {
       filters.cursorPointer,
       filters.reverse
     );
-    console.log(dynamoDbOption)
     const products = await this.productTable.find({}, dynamoDbOption);
+    this.logger.log(`Found ${products.length} products`);
     const convertedProductsToDTO = await Promise.all(products.map(this.convertToReadProductDTO));
     return new PaginatedDataDTO(convertedProductsToDTO, products.next, products.prev);
   }
 
   async findProductsByDateRange(filters: FindProductsByDateRangeDTO): Promise<PaginatedDataDTO<ReadProductDTO>> {
-    console.log(filters.reverse);
+    this.logger.log('findProductsByDateRange method called');
     const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
       filters.limit,
       'GSI2', // Using GSI2 which is indexed by the created date
@@ -52,8 +58,6 @@ export class BackendServiceProductsService {
       filters.cursorPointer,
       filters.reverse
     );
-
-    console.log(dynamoDbOption)
 
     const products = await this.productTable.find(
       {
@@ -63,6 +67,7 @@ export class BackendServiceProductsService {
       dynamoDbOption
     );
 
+    this.logger.log(`Found ${products.length} products between dates`);
     const convertedProductsToDTO = await Promise.all(products.map(this.convertToReadProductDTO));
     return new PaginatedDataDTO(convertedProductsToDTO, products.next, products.prev);
   }
@@ -80,3 +85,5 @@ export class BackendServiceProductsService {
     };
   }
 }
+
+

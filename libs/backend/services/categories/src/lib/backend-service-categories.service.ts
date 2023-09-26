@@ -1,10 +1,11 @@
 import { CreateCategoryType } from './dto/create-category.dto';
 import { ReadCategoryDTO } from './dto/read-category.dto';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { DynamoDbService, CategoryType } from '@apple/backend/dynamodb-onetable';
 
 @Injectable()
 export class BackendServiceCategoriesService {
+  private readonly logger = new Logger(BackendServiceCategoriesService.name);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private categoryTable: any = null;
 
@@ -12,19 +13,24 @@ export class BackendServiceCategoriesService {
     private readonly dynamoDbService: DynamoDbService,
   ) {
     this.categoryTable = this.dynamoDbService.dynamoDbMainTable().getModel('Category');
+    this.logger.log('BackendServiceCategoriesService initialized');
   }
 
   async createCategory(createCategoryType: CreateCategoryType): Promise<ReadCategoryDTO> {
+    this.logger.log('createCategory method called');
     const category: CategoryType = {
       categoryName: createCategoryType.categoryName,
       description: createCategoryType.description,
     }
     const createdCategory: CategoryType = await this.categoryTable.create(category);
+    this.logger.log(`Category created with id: ${createdCategory.categoryId}`);
     return this.convertToReadCategoryDTO(createdCategory);
   }
 
   async findAllCategories(): Promise<ReadCategoryDTO[]> {
+    this.logger.log('findAllCategories method called');
     const categories = await this.categoryTable.find();
+    this.logger.log(`Found ${categories.length} categories`);
     return Promise.all(categories.map(this.convertToReadCategoryDTO));
   }
 
@@ -38,3 +44,4 @@ export class BackendServiceCategoriesService {
     };
   }
 }
+
