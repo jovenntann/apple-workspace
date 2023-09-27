@@ -13,12 +13,7 @@ export class ProductsController {
     private readonly backendServiceProductsService: BackendServiceProductsService
   ) {}
 
-  @TsRestHandler(apiProduct, {
-    // TODO: Check if we need to validate the request body, query and headers or is it done by default
-    // validateRequestBody: true,
-    // validateRequestQuery: true,
-    // validateRequestHeaders: true
-  })
+  @TsRestHandler(apiProduct)
   async handler() {
     return tsRestHandler(apiProduct, {
       findAllProducts: async ({ query }) => {
