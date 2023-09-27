@@ -39,27 +39,34 @@ export class BackendServiceProductsService {
     const products = await this.productTable.find({}, dynamoDbOption);
     this.logger.log(`Found ${products.length} products`);
 
-    const convertedProducts = await Promise.all(
-      products.map(this.convertToProduct)
-    );
-
     return {
-      data: convertedProducts,
+      data: products,
       nextCursorPointer: products.next,
       prevCursorPointer: products.prev
     };
   }
 
-  private async convertToProduct(productType: ProductType): Promise<Product> {
-    return {
-      productId: productType.productId,
-      productName: productType.productName,
-      description: productType.description,
-      price: productType.price,
-      stock: productType.stock,
-      categoryId: productType.categoryId,
-      created: productType.created,
-      updated: productType.updated
-    };
+  // Since this function is to save a product into a database we need to ensure that the product is valid ProductType Entity
+  // Promise<Product> because this is the return requirements from the contract
+  async createProduct(productType: ProductType): Promise<Product> {
+    this.logger.log('createProduct method called');
+    const createdProduct = await this.productTable.create(productType);
+    this.logger.log(createdProduct)
+    this.logger.log(`Product created with id ${createdProduct.productId}`);
+
+    return createdProduct;
   }
+
+  // private async convertToProduct(productType: ProductType): Promise<Product> {
+  //   return {
+  //     productId: productType.productId || '',
+  //     productName: productType.productName,
+  //     description: productType.description,
+  //     price: productType.price,
+  //     stock: productType.stock,
+  //     categoryId: productType.categoryId,
+  //     created: productType.created,
+  //     updated: productType.updated
+  //   };
+  // }
 }
