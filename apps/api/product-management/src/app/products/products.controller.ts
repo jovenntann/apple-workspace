@@ -1,9 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { apiProduct } from '@apple/shared/contracts';
-import {
-  TsRestHandler,
-  tsRestHandler
-} from '@ts-rest/nest';
+import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 
 import { BackendServiceProductsService } from '@apple/backend/services/products';
 
@@ -28,33 +25,20 @@ export class ProductsController {
           status: 200,
           body: { data, nextCursorPointer, prevCursorPointer }
         };
+      },
+
+      createProduct: async ({ body }) => {
+        const product = await this.backendServiceProductsService.createProduct(
+          body
+        );
+        return {
+          status: 201,
+          body: product
+        };
       }
     });
   }
 }
-
-// @TsRest(contract.findAllProducts)
-// async getPosts(
-//   @TsRestRequest()
-//   request: RequestShapes['findAllProducts']
-// ) {
-//   const limit = request.query.limit;
-//   const reverse = request.query?.reverse;
-//   const cursorPointer = request.query?.cursorPointer;
-//   const direction = request.query?.direction;
-
-//   const { data, nextCursorPointer, prevCursorPointer } = await this.backendServiceProductsService.findAllProducts({
-//     limit,
-//     reverse,
-//     cursorPointer,
-//     direction
-//   });
-
-//   return {
-//     status: 200,
-//     body: { data, nextCursorPointer, prevCursorPointer },
-//   };
-// }
 
 // @Controller('products')
 // @ApiTags('products')
@@ -63,19 +47,6 @@ export class ProductsController {
 //   constructor(
 //     private readonly backendServiceProductsService: BackendServiceProductsService,
 //   ) {}
-
-//   @Post()
-//   @ApiCreatedResponse({ type: ReadProductDTO })
-//   create(@Body() createProductDto: CreateProductDTO) {
-//     return this.backendServiceProductsService.createProduct(createProductDto);
-//   }
-
-//   @Get()
-//   @ApiOkResponse({ type: ReadProductsDTO })
-//   findAll(@Query(new ValidationPipe({ transform: true })) query: PaginationQueryDTO) {
-//     return this.backendServiceProductsService.findAllProducts(query);
-//   }
-
 //   @Get('by-date-range')
 //   @ApiOkResponse({ type: ReadProductsDTO })
 //   findByDateRange(@Query(new ValidationPipe({ transform: true })) query: FindProductsByDateRangeDTO) {
