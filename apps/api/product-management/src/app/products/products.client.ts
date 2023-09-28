@@ -1,7 +1,7 @@
 import { initClient,  } from "@ts-rest/core";
-import { apiProduct } from '@apple/shared/contracts';
+import { contract } from '@apple/shared/contracts';
 
-const client = initClient(apiProduct, {
+const client = initClient(contract.productManagementContract.productContract, {
     baseUrl: 'http://localhost:3001/api',
     baseHeaders: {}
 });

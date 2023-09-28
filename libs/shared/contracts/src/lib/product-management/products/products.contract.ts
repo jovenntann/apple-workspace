@@ -1,10 +1,10 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 
-export type Product = z.infer<typeof ProductSchema>;
-export type ProductResponse = z.infer<typeof ProductResponseSchema>;
+export type ProductManagementProductsProduct = z.infer<typeof ProductManagementProductsProductSchema>;
+export type ProductManagementProductsProductResponse = z.infer<typeof ProductManagementProductsProductResponseSchema>;
 
-const ProductSchema = z.object({
+const ProductManagementProductsProductSchema = z.object({
   productId: z.string(),
   productName: z.string(),
   description: z.string().optional(),
@@ -15,8 +15,8 @@ const ProductSchema = z.object({
   updated: z.date()
 });
 
-const ProductResponseSchema = z.object({
-  data: z.array(ProductSchema),
+const ProductManagementProductsProductResponseSchema = z.object({
+  data: z.array(ProductManagementProductsProductSchema),
   nextCursorPointer: z.object({
     SK: z.string(),
     PK: z.string(),
@@ -60,12 +60,12 @@ const QuerySchema = z.object({
   direction: z.enum(['prev', 'next']).optional()
 });
 
-export const apiProduct = c.router({
+export const productContract = c.router({
   findAllProducts: {
     method: 'GET',
     path: '/api/products',
     responses: {
-      200: ProductResponseSchema,
+      200: ProductManagementProductsProductResponseSchema,
       400: ErrorResponseSchema
     },
     query: QuerySchema,
@@ -79,7 +79,7 @@ export const apiProduct = c.router({
     method: 'POST',
     path: '/api/products',
     responses: {
-      201: ProductSchema
+      201: ProductManagementProductsProductSchema
     },
     body: z.object({
       productName: z.string(),
@@ -98,7 +98,7 @@ export const apiProduct = c.router({
     method: 'GET',
     path: '/api/products/by-date-range',
     responses: {
-      200: ProductResponseSchema,
+      200: ProductManagementProductsProductResponseSchema,
       400: ErrorResponseSchema
     },
     query: z.object({

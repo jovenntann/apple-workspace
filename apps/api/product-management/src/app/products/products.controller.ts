@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { apiProduct } from '@apple/shared/contracts';
+import { contract } from '@apple/shared/contracts';
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 
 import { BackendServiceProductsService } from '@apple/backend/services/products';
@@ -10,9 +10,9 @@ export class ProductsController {
     private readonly backendServiceProductsService: BackendServiceProductsService
   ) {}
 
-  @TsRestHandler(apiProduct)
+  @TsRestHandler(contract.productManagementContract.productContract)
   async handler() {
-    return tsRestHandler(apiProduct, {
+    return tsRestHandler(contract.productManagementContract.productContract, {
       findAllProducts: async ({ query }) => {
         const { data, nextCursorPointer, prevCursorPointer } =
           await this.backendServiceProductsService.findAllProducts({

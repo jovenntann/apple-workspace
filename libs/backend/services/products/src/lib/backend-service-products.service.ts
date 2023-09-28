@@ -4,7 +4,7 @@ import {
   ProductType,
   createDynamoDbOptionWithPKSKIndex
 } from '@apple/backend/dynamodb-onetable';
-import { Product, ProductResponse } from '@apple/shared/contracts';
+import { ProductManagementProductsProduct, ProductManagementProductsProductResponse } from '@apple/shared/contracts';
 
 @Injectable()
 export class BackendServiceProductsService {
@@ -25,7 +25,7 @@ export class BackendServiceProductsService {
     reverse?: boolean;
     cursorPointer?: string;
     direction?: string;
-  }): Promise<ProductResponse> {
+  }): Promise<ProductManagementProductsProductResponse> {
     this.logger.log('findAllProducts method called');
 
     const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
@@ -48,7 +48,7 @@ export class BackendServiceProductsService {
 
   // Since this function is to save a product into a database we need to ensure that the product is valid ProductType Entity
   // Promise<Product> because this is the return requirements from the contract
-  async createProduct(productType: ProductType): Promise<Product> {
+  async createProduct(productType: ProductType): Promise<ProductManagementProductsProduct> {
     this.logger.log('createProduct method called');
     const createdProduct = await this.productTable.create(productType);
     this.logger.log(createdProduct);
@@ -64,7 +64,7 @@ export class BackendServiceProductsService {
     reverse?: boolean;
     cursorPointer?: string;
     direction?: string;
-  }): Promise<ProductResponse> {
+  }): Promise<ProductManagementProductsProductResponse> {
     this.logger.log('getProductsByDateRange method called');
 
     const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
