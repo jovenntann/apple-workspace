@@ -4,5 +4,5 @@ import { apiProduct } from './products/product.contract';
 const c = initContract();
 
 export const contract = c.router({
-  products: apiProduct,
+  products: apiProduct
 });
