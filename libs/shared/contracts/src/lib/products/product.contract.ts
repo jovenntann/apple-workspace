@@ -1,35 +1,37 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 
-// export interface Product {
-//   productId: string;
-//   productName: string;
-//   description?: string;
-//   price: number;
-//   stock: number;
-//   categoryId: string;
-//   created: Date;
-//   updated: Date;
-// }
+/*
+export interface Product {
+  productId: string;
+  productName: string;
+  description?: string;
+  price: number;
+  stock: number;
+  categoryId: string;
+  created: Date;
+  updated: Date;
+}
 
-// export interface ProductResponse {
-//   data: Product[];
-//   nextCursorPointer: {
-//     SK: string;
-//     PK: string;
-//     GSI2PK: string;
-//     GSI2SK: string;
-//   };
-//   prevCursorPointer: {
-//     SK: string;
-//     PK: string;
-//     GSI2PK: string;
-//     GSI2SK: string;
-//   };
-// }
+export interface ProductResponse {
+  data: Product[];
+  nextCursorPointer: {
+    SK: string;
+    PK: string;
+    GSI2PK: string;
+    GSI2SK: string;
+  };
+  prevCursorPointer: {
+    SK: string;
+    PK: string;
+    GSI2PK: string;
+    GSI2SK: string;
+  };
+}
+*/
 
 /*
-* Q: can i just use ProductSchema as Interface?
+? Can i just use ProductSchema as Interface?
 * A: No, you cannot directly use a Zod schema as a TypeScript interface. They serve different purposes and work at different stages of the code execution.
 * A TypeScript interface is a compile-time construct used by the TypeScript compiler for type checking. It doesn't exist at runtime and doesn't provide any runtime validation or transformation capabilities.
 * On the other hand, a Zod schema is a runtime construct used for data validation and transformation at runtime. It doesn't provide any compile-time type checking.
@@ -38,7 +40,6 @@ import { z } from 'zod';
 * In this code, Product is a type derived from ProductSchema. It can be used similarly to an interface for type checking. But remember, 
 * it's not an interface, it's a type. There are some differences between interfaces and types in TypeScript, but for most use cases, they can be used interchangeably.
 */
-
 
 export type Product = z.infer<typeof ProductSchema>;
 export type ProductResponse = z.infer<typeof ProductResponseSchema>;
@@ -73,33 +74,43 @@ const ProductResponseSchema = z.object({
 
 const c = initContract();
 
+const ErrorResponseSchema = z.object({
+  message: z.string(),
+  error: z.string(),
+  statusCode: z.number()
+});
+
+const QuerySchema = z.object({
+  limit: z
+  .string()
+  .optional()
+  .transform((val) => {
+    if (isNaN(Number(val))) {
+      return '0'; // return a default value
+    }
+    return val;
+  })
+  .refine((val) => Number(val) >= 10 && Number(val) <= 100, {
+    message: 'Limit must be between 10 and 100'
+  }),
+  // * Since Query is String and we are expecting a boolean I think it would be better to use enum and transform it to boolean
+  reverse: z
+    .enum(['true', 'false'])
+    .optional()
+    .transform((val) => val === 'true'),
+  cursorPointer: z.string().optional(),
+  direction: z.enum(['prev', 'next']).optional()
+});
+
 export const apiProduct = c.router({
   findAllProducts: {
     method: 'GET',
     path: '/api/products',
     responses: {
       200: ProductResponseSchema,
-      400: z.object({
-        message: z.string(),
-        error: z.string(),
-        statusCode: z.number()
-      })
+      400: ErrorResponseSchema
     },
-    query: z.object({
-      limit: z
-        .string()
-        .optional()
-        .transform((val) => (isNaN(Number(val)) ? '10' : val))
-        .refine((val) => Number(val) <= 100, {
-          message: 'Limit must be less than or equal to 100'
-        }),
-      reverse: z
-        .string()
-        .optional()
-        .transform((val) => val === 'true'),
-      cursorPointer: z.string().optional(),
-      direction: z.enum(['prev', 'next']).optional()
-    }),
+    query: QuerySchema,
     summary: 'Get products with optional limit and reverse flag',
     description: 'Get products with optional limit and reverse flag',
     metadata: { roles: ['guest', 'user'] } as const,
@@ -126,6 +137,8 @@ export const apiProduct = c.router({
   }
 });
 
-// EXAMPLES: Since Body, Query and Params (not sure) from Request is String we need to convert it to Date using Zod
-// created: z.string().transform((val) => new Date(val)),
-// updated: z.string().transform((val) => new Date(val))
+/*
+? EXAMPLES: Since Body, Query and Params (not sure) from Request is String we need to convert it to Date using Zod
+* created: z.string().transform((val) => new Date(val)),
+* updated: z.string().transform((val) => new Date(val))
+*/
