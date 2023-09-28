@@ -30,7 +30,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, openApiDocument);
 
   // Define Port
-  const port = process.env.PORT || 3001;
+  const port = process.env.PORT || 3000;
 
   // Listen on defined port
   await app.listen(port);

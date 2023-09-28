@@ -126,6 +126,6 @@ export const apiProduct = c.router({
   }
 });
 
-// EXAMPLES:
+// EXAMPLES: Since Body, Query and Params (not sure) from Request is String we need to convert it to Date using Zod
 // created: z.string().transform((val) => new Date(val)),
 // updated: z.string().transform((val) => new Date(val))
