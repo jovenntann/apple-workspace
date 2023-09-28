@@ -51,10 +51,45 @@ export class BackendServiceProductsService {
   async createProduct(productType: ProductType): Promise<Product> {
     this.logger.log('createProduct method called');
     const createdProduct = await this.productTable.create(productType);
-    this.logger.log(createdProduct)
+    this.logger.log(createdProduct);
     this.logger.log(`Product created with id ${createdProduct.productId}`);
 
     return createdProduct;
+  }
+
+  async getProductsByDateRange(query: {
+    startDate: Date;
+    endDate: Date;
+    limit: number;
+    reverse?: boolean;
+    cursorPointer?: string;
+    direction?: string;
+  }): Promise<ProductResponse> {
+    this.logger.log('getProductsByDateRange method called');
+
+    const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
+      query.limit,
+      'GSI2', // This is an example it could be any other GSI or empty string
+      query.direction,
+      query.cursorPointer,
+      query.reverse
+    );
+
+    const products = await this.productTable.find(
+      {
+        GSI2PK: 'PRODUCT',
+        GSI2SK: { between: [query.startDate, query.endDate] }
+      },
+      dynamoDbOption
+    );
+
+    this.logger.log(`Found ${products.length} products`);
+
+    return {
+      data: products,
+      nextCursorPointer: products.next,
+      prevCursorPointer: products.prev
+    };
   }
 
   // private async convertToProduct(productType: ProductType): Promise<Product> {

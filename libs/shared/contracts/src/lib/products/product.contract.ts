@@ -92,5 +92,23 @@ export const apiProduct = c.router({
     description: 'Create a new product',
     metadata: { roles: ['user'] } as const,
     strictStatusCodes: true
+  },
+
+  getProductsByDateRange: {
+    method: 'GET',
+    path: '/api/products/by-date-range',
+    responses: {
+      200: ProductResponseSchema,
+      400: ErrorResponseSchema
+    },
+    query: z.object({
+      startDate: z.string().transform((date) => new Date(date)),
+      endDate: z.string().transform((date) => new Date(date)),
+      ...QuerySchema.shape
+    }),
+    summary: 'Get products by date range',
+    description: 'Get products by date range',
+    metadata: { roles: ['guest', 'user'] } as const,
+    strictStatusCodes: true
   }
 });

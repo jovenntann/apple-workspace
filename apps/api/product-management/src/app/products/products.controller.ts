@@ -35,21 +35,24 @@ export class ProductsController {
           status: 201,
           body: product
         };
-      }
+      },
+
+      getProductsByDateRange: async ({ query }) => {
+        const { data, nextCursorPointer, prevCursorPointer } =
+          await this.backendServiceProductsService.getProductsByDateRange({
+            startDate: query.startDate,
+            endDate: query.endDate,
+            limit: Number(query.limit),
+            reverse: query.reverse,
+            cursorPointer: query?.cursorPointer,
+            direction: query?.direction
+          });
+        return {
+          status: 200,
+          body: { data, nextCursorPointer, prevCursorPointer }
+        };
+      },
     });
   }
 }
 
-// @Controller('products')
-// @ApiTags('products')
-// @ApiBearerAuth('JWT-auth')
-// export class ProductsController {
-//   constructor(
-//     private readonly backendServiceProductsService: BackendServiceProductsService,
-//   ) {}
-//   @Get('by-date-range')
-//   @ApiOkResponse({ type: ReadProductsDTO })
-//   findByDateRange(@Query(new ValidationPipe({ transform: true })) query: FindProductsByDateRangeDTO) {
-//     return this.backendServiceProductsService.findProductsByDateRange(query);
-//   }
-// }
