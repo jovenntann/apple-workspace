@@ -91,17 +91,4 @@ export class BackendServiceProductsService {
       prevCursorPointer: products.prev
     };
   }
-
-  // private async convertToProduct(productType: ProductType): Promise<Product> {
-  //   return {
-  //     productId: productType.productId || '',
-  //     productName: productType.productName,
-  //     description: productType.description,
-  //     price: productType.price,
-  //     stock: productType.stock,
-  //     categoryId: productType.categoryId,
-  //     created: productType.created,
-  //     updated: productType.updated
-  //   };
-  // }
 }

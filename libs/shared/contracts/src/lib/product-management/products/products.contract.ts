@@ -60,7 +60,7 @@ const QuerySchema = z.object({
   direction: z.enum(['prev', 'next']).optional()
 });
 
-export const productContract = c.router({
+export const products = c.router({
   findAllProducts: {
     method: 'GET',
     path: '/api/products',

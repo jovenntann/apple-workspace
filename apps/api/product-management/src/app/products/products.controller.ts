@@ -10,9 +10,9 @@ export class ProductsController {
     private readonly backendServiceProductsService: BackendServiceProductsService
   ) {}
 
-  @TsRestHandler(contract.productManagementContract.productContract)
+  @TsRestHandler(contract.productManagement.products)
   async handler() {
-    return tsRestHandler(contract.productManagementContract.productContract, {
+    return tsRestHandler(contract.productManagement.products, {
       findAllProducts: async ({ query }) => {
         const { data, nextCursorPointer, prevCursorPointer } =
           await this.backendServiceProductsService.findAllProducts({

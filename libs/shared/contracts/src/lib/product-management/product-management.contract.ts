@@ -1,8 +1,8 @@
 import { initContract } from '@ts-rest/core';
-import { productContract } from './products/products.contract';
+import { products } from './products/products.contract';
 
 const c = initContract();
 
-export const productManagementContract = c.router({
-  productContract: productContract
+export const productManagement = c.router({
+  products: products
 });

@@ -3,7 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 
-import { productContract } from '@apple/shared/contracts';
+import { contract } from '@apple/shared/contracts';
 import { generateOpenApi } from '@ts-rest/open-api';
 
 async function bootstrap() {
@@ -14,7 +14,7 @@ async function bootstrap() {
   // app.setGlobalPrefix(globalPrefix);
 
   const openApiDocument = generateOpenApi(
-    productContract,
+    contract.productManagement.products,
     {
       info: {
         title: 'Product Management API',
