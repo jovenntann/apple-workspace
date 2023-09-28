@@ -1,29 +1,42 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
-import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { Controller } from '@nestjs/common';
+import { contract } from '@apple/shared/contracts';
+import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 
-import {
-  BackendServiceCategoriesService,
-  CreateCategoryDTO,
-  ReadCategoryDTO,
-} from '@apple/backend/services/categories';
+import { BackendServiceCategoriesService } from '@apple/backend/services/categories';
 
-@Controller('categories')
-@ApiTags('categories')
-@ApiBearerAuth('JWT-auth')
+@Controller()
 export class CategoriesController {
   constructor(
-    private readonly backendServiceCategoriesService: BackendServiceCategoriesService,
+    private readonly backendServiceCategoriesService: BackendServiceCategoriesService
   ) {}
 
-  @Post()
-  @ApiCreatedResponse({ type: ReadCategoryDTO })
-  create(@Body() createCategoryDto: CreateCategoryDTO) {
-    return this.backendServiceCategoriesService.createCategory(createCategoryDto);
-  }
+  @TsRestHandler(contract.productManagement.categories)
+  async handler() {
+    return tsRestHandler(contract.productManagement.categories, {
+      findAllCategories: async ({ query }) => {
+        const { data, nextCursorPointer, prevCursorPointer } =
+          await this.backendServiceCategoriesService.findAllCategories({
+            limit: Number(query.limit),
+            reverse: query.reverse,
+            cursorPointer: query?.cursorPointer,
+            direction: query?.direction
+          });
+        return {
+          status: 200,
+          body: { data, nextCursorPointer, prevCursorPointer }
+        };
+      },
 
-  @Get()
-  @ApiOkResponse({ type: [ReadCategoryDTO] })
-  findAll() {
-    return this.backendServiceCategoriesService.findAllCategories();
+      createCategory: async ({ body }) => {
+        const category = await this.backendServiceCategoriesService.createCategory(
+          body
+        );
+        return {
+          status: 201,
+          body: category
+        };
+      },
+    });
   }
 }
+

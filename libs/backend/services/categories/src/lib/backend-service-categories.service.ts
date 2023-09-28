@@ -1,7 +1,10 @@
-import { CreateCategoryType } from './dto/create-category.dto';
-import { ReadCategoryDTO } from './dto/read-category.dto';
 import { Injectable, Logger } from '@nestjs/common';
-import { DynamoDbService, CategoryType } from '@apple/backend/dynamodb-onetable';
+import {
+  DynamoDbService,
+  CategoryType,
+  createDynamoDbOptionWithPKSKIndex
+} from '@apple/backend/dynamodb-onetable';
+import { ProductManagementProductsCategory, ProductManagementProductsCategoryResponse } from '@apple/shared/contracts';
 
 @Injectable()
 export class BackendServiceCategoriesService {
@@ -9,39 +12,48 @@ export class BackendServiceCategoriesService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private categoryTable: any = null;
 
-  constructor(
-    private readonly dynamoDbService: DynamoDbService,
-  ) {
-    this.categoryTable = this.dynamoDbService.dynamoDbMainTable().getModel('Category');
+  constructor(private readonly dynamoDbService: DynamoDbService) {
+    this.categoryTable = this.dynamoDbService
+      .dynamoDbMainTable()
+      .getModel('Category');
+    this.logger = new Logger(BackendServiceCategoriesService.name);
     this.logger.log('BackendServiceCategoriesService initialized');
   }
 
-  async createCategory(createCategoryType: CreateCategoryType): Promise<ReadCategoryDTO> {
-    this.logger.log('createCategory method called');
-    const category: CategoryType = {
-      categoryName: createCategoryType.categoryName,
-      description: createCategoryType.description,
-    }
-    const createdCategory: CategoryType = await this.categoryTable.create(category);
-    this.logger.log(`Category created with id: ${createdCategory.categoryId}`);
-    return this.convertToReadCategoryDTO(createdCategory);
-  }
-
-  async findAllCategories(): Promise<ReadCategoryDTO[]> {
+  async findAllCategories(query: {
+    limit: number;
+    reverse?: boolean;
+    cursorPointer?: string;
+    direction?: string;
+  }): Promise<ProductManagementProductsCategoryResponse> {
     this.logger.log('findAllCategories method called');
-    const categories = await this.categoryTable.find();
-    this.logger.log(`Found ${categories.length} categories`);
-    return Promise.all(categories.map(this.convertToReadCategoryDTO));
-  }
 
-  private async convertToReadCategoryDTO(categoryType: CategoryType): Promise<ReadCategoryDTO> {
+    const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
+      query.limit,
+      '', // This could be any other GSI or an empty string
+      query.direction,
+      query.cursorPointer,
+      query.reverse
+    );
+
+    const categories = await this.categoryTable.find({}, dynamoDbOption);
+    this.logger.log(`Found ${categories.length} categories`);
+
     return {
-      categoryId: categoryType.categoryId,
-      categoryName: categoryType.categoryName,
-      description: categoryType.description,
-      created: categoryType.created,
-      updated: categoryType.updated,
+      data: categories,
+      nextCursorPointer: categories.next,
+      prevCursorPointer: categories.prev
     };
   }
-}
 
+  // Since this function is to save a category into a database we need to ensure that the category is valid CategoryType Entity
+  // Promise<Category> because this is the return requirements from the contract
+  async createCategory(categoryType: CategoryType): Promise<ProductManagementProductsCategory> {
+    this.logger.log('createCategory method called');
+    const createdCategory = await this.categoryTable.create(categoryType);
+    this.logger.log(createdCategory);
+    this.logger.log(`Category created with id ${createdCategory.categoryId}`);
+
+    return createdCategory;
+  }
+}

@@ -14,7 +14,7 @@ async function bootstrap() {
   // app.setGlobalPrefix(globalPrefix);
 
   const openApiDocument = generateOpenApi(
-    contract.productManagement.products,
+    contract.productManagement,
     {
       info: {
         title: 'Product Management API',
