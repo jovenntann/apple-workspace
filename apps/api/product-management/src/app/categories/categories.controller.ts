@@ -16,7 +16,7 @@ export class CategoriesController {
       findAllCategories: async ({ query }) => {
         const { data, nextCursorPointer, prevCursorPointer } =
           await this.backendServiceCategoriesService.findAllCategories({
-            limit: Number(query.limit),
+            limit:query.limit,
             reverse: query.reverse,
             cursorPointer: query?.cursorPointer,
             direction: query?.direction

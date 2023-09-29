@@ -42,11 +42,11 @@ const QuerySchema = z.object({
     .optional()
     .transform((val) => {
       if (isNaN(Number(val))) {
-        return '0';
+        return 0;
       }
-      return val;
+      return Number(val);
     })
-    .refine((val) => Number(val) >= 10 && Number(val) <= 100, {
+    .refine((val) => val >= 10 && val <= 100, {
       message: 'Limit must be between 10 and 100'
     }),
   reverse: z
