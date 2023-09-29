@@ -1,0 +1,50 @@
+import { initContract } from '@ts-rest/core';
+import { z } from 'zod';
+
+import { PaginateQuerySchema } from '../../utils/paginate-query.schema';
+import { ErrorResponseSchema } from '../../utils/error-response.schema';
+
+export type UserManagementUsersUser = z.infer<typeof UserManagementUsersUserSchema>;
+export type UserManagementUsersUserResponse = z.infer<typeof UserManagementUsersUserResponseSchema>;
+
+const UserManagementUsersUserSchema = z.object({
+  userId: z.string(),
+  username: z.string(),
+  email: z.string(),
+  created: z.date(),
+  updated: z.date()
+});
+
+const UserManagementUsersUserResponseSchema = z.object({
+  data: z.array(UserManagementUsersUserSchema),
+  nextCursorPointer: z.object({
+    SK: z.string(),
+    PK: z.string(),
+    GSI2PK: z.string(),
+    GSI2SK: z.string()
+  }),
+  prevCursorPointer: z.object({
+    SK: z.string(),
+    PK: z.string(),
+    GSI2PK: z.string(),
+    GSI2SK: z.string()
+  })
+});
+
+const c = initContract();
+
+export const users = c.router({
+  findAllUsers: {
+    method: 'GET',
+    path: '/api/users',
+    responses: {
+      200: UserManagementUsersUserResponseSchema,
+      400: ErrorResponseSchema
+    },
+    query: PaginateQuerySchema,
+    summary: 'Get users with optional limit and reverse flag',
+    description: 'Get users with optional limit and reverse flag',
+    metadata: { roles: ['admin'] } as const,
+    strictStatusCodes: true
+  }
+});
