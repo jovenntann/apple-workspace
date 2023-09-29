@@ -1,5 +1,7 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
+import { PaginateQuerySchema } from '../../utils/paginate-query.schema';
+import { ErrorResponseSchema } from '../../utils/error-response.schema';
 
 export type ProductManagementProductsCategory = z.infer<typeof ProductManagementProductsCategorySchema>;
 export type ProductManagementProductsCategoryResponse = z.infer<typeof ProductManagementProductsCategoryResponseSchema>;
@@ -30,33 +32,6 @@ const ProductManagementProductsCategoryResponseSchema = z.object({
 
 const c = initContract();
 
-const ErrorResponseSchema = z.object({
-  message: z.string(),
-  error: z.string(),
-  statusCode: z.number()
-});
-
-const QuerySchema = z.object({
-  limit: z
-    .string()
-    .optional()
-    .transform((val) => {
-      if (isNaN(Number(val))) {
-        return 0;
-      }
-      return Number(val);
-    })
-    .refine((val) => val >= 10 && val <= 100, {
-      message: 'Limit must be between 10 and 100'
-    }),
-  reverse: z
-    .enum(['true', 'false'])
-    .optional()
-    .transform((val) => val === 'true'),
-  cursorPointer: z.string().optional(),
-  direction: z.enum(['prev', 'next']).optional()
-});
-
 export const categories = c.router({
   findAllCategories: {
     method: 'GET',
@@ -65,7 +40,7 @@ export const categories = c.router({
       200: ProductManagementProductsCategoryResponseSchema,
       400: ErrorResponseSchema
     },
-    query: QuerySchema,
+    query: PaginateQuerySchema,
     summary: 'Get categories with optional limit and reverse flag',
     description: 'Get categories with optional limit and reverse flag',
     metadata: { roles: ['guest', 'user'] } as const,

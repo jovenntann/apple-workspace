@@ -6,6 +6,12 @@ const client = initClient(contract.productManagement.products, {
     baseHeaders: {}
 });
 
+const categoriesClient = initClient(contract.productManagement.categories, {
+    baseUrl: 'http://localhost:3001/api',
+    baseHeaders: {}
+});
+
+
 async function run() {
     const { body, status } = await client.findAllProducts({
         query: {
@@ -30,4 +36,18 @@ async function run() {
     }
 }
 
+async function getAllCategories() {
+    const { body, status } = await categoriesClient.findAllCategories();
+
+    if (status === 200) {
+        return body;
+    }
+
+    if (status === 400) {
+        return body;
+    }
+}
+
+
 run()
+getAllCategories()
