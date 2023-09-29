@@ -10,6 +10,17 @@ export const Schema = {
     GSI6: { hash: 'GSI6PK' },
   },
   models: {
+    User: {
+      PK: { type: String, value: 'USER' },
+      SK: { type: String, value: '${userId}' },
+      GSI1PK: { type: String, value: 'USER' },
+      GSI1SK: { type: String, value: '${email}' }, // To query users by email
+      userId: { type: String, generate: 'ulid' },
+      username: { type: String, required: true },
+      email: { type: String, required: true },
+      created: { type: Date, timestamp: true },
+      updated: { type: Date, timestamp: true },
+    },
     Product: {
       PK: { type: String, value: 'PRODUCT' },
       SK: { type: String, value: '${productId}' },
