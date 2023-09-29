@@ -91,4 +91,11 @@ export class BackendServiceProductsService {
       prevCursorPointer: products.prev
     };
   }
+
+  async getProductById(productId: string): Promise<ProductManagementProductsProduct> {
+    this.logger.log('getProductById method called');
+    const product = await this.productTable.get({ productId });
+    this.logger.log(`Found product with id ${product.productId}`);
+    return product;
+  }
 }

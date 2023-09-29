@@ -86,5 +86,21 @@ export const products = c.router({
     description: 'Get products by date range',
     metadata: { roles: ['guest', 'user'] } as const,
     strictStatusCodes: true
-  }
+  },
+
+  getProductById: {
+    method: 'GET',
+    path: '/api/products/:id',
+    responses: {
+      200: ProductManagementProductsProductSchema
+    },
+    summary: 'Get product by id',
+    description: 'Get product by id',
+    metadata: { 
+      roles: ['guest', 'user'],
+      identifierPath: 'params.id',
+    } as const,
+    strictStatusCodes: true
+  },
+
 });

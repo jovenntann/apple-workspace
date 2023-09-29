@@ -52,6 +52,17 @@ export class ProductsController {
           body: { data, nextCursorPointer, prevCursorPointer }
         };
       },
+
+      getProductById: async ({ params }) => {
+        const product = await this.backendServiceProductsService.getProductById(
+          params.id
+        );
+        return {
+          status: 200,
+          body: product
+        };
+      },
+
     });
   }
 }

@@ -48,6 +48,19 @@ async function getAllCategories() {
     }
 }
 
+async function getProductById(id: string) {
+    const { body, status } = await client.getProductById({ params: { id } });
+
+    if (status === 200) {
+        return body;
+    }
+
+    if (status === 400) {
+        return body;
+    }
+}
+
 
 run()
 getAllCategories()
+getProductById('12345')
