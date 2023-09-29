@@ -16,7 +16,7 @@ export class ProductsController {
       findAllProducts: async ({ query }) => {
         const { data, nextCursorPointer, prevCursorPointer } =
           await this.backendServiceProductsService.findAllProducts({
-            limit: Number(query.limit),
+            limit: query.limit,
             reverse: query.reverse,
             cursorPointer: query?.cursorPointer,
             direction: query?.direction
@@ -42,7 +42,7 @@ export class ProductsController {
           await this.backendServiceProductsService.getProductsByDateRange({
             startDate: query.startDate,
             endDate: query.endDate,
-            limit: Number(query.limit),
+            limit: query.limit,
             reverse: query.reverse,
             cursorPointer: query?.cursorPointer,
             direction: query?.direction
