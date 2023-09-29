@@ -13,10 +13,10 @@ async function bootstrap() {
   const globalPrefix = 'api';
 
   const openApiDocument = generateOpenApi(
-    contract.productManagement,
+    contract.userManagement,
     {
       info: {
-        title: 'Product Management API',
+        title: 'User Management API',
         version: '1.0.0'
       }
     },
@@ -29,7 +29,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, openApiDocument);
 
   // Define Port
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3001;
 
   // Listen on defined port
   await app.listen(port);
@@ -44,3 +44,4 @@ async function bootstrap() {
 }
 
 bootstrap();
+

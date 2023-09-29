@@ -24,6 +24,9 @@
       "@apple/backend/services/products": [
         "libs/backend/services/products/src/index.ts"
       ],
+      "@apple/backend/services/users": [
+        "libs/backend/services/users/src/index.ts"
+      ],
       "@apple/shared/contracts": ["libs/shared/contracts/src/index.ts"],
       "@apple/shared/dto": ["libs/shared/dto/src/index.ts"]
     },

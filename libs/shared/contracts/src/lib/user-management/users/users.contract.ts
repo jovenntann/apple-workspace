@@ -46,5 +46,21 @@ export const users = c.router({
     description: 'Get users with optional limit and reverse flag',
     metadata: { roles: ['admin'] } as const,
     strictStatusCodes: true
-  }
+  },
+
+  createUser: {
+    method: 'POST',
+    path: '/api/users',
+    responses: {
+      201: UserManagementUsersUserSchema,
+    },
+    body: z.object({
+      username: z.string(),
+      email: z.string(),
+    }),
+    summary: 'Create a new user',
+    description: 'Create a new user',
+    metadata: { roles: ['admin'] } as const,
+    strictStatusCodes: true
+  },
 });
