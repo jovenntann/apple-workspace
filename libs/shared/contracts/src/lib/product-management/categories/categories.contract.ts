@@ -3,10 +3,10 @@ import { z } from 'zod';
 import { PaginateQuerySchema } from '../../utils/paginate-query.schema';
 import { ErrorResponseSchema } from '../../utils/error-response.schema';
 
-export type ProductManagementProductsCategory = z.infer<typeof ProductManagementProductsCategorySchema>;
-export type ProductManagementProductsCategoryResponse = z.infer<typeof ProductManagementProductsCategoryResponseSchema>;
+export type ProductManagementCategoriesCategory = z.infer<typeof ProductManagementCategoriesCategorySchema>;
+export type ProductManagementCategoriesCategoryResponse = z.infer<typeof ProductManagementCategoriesCategoryResponseSchema>;
 
-const ProductManagementProductsCategorySchema = z.object({
+const ProductManagementCategoriesCategorySchema = z.object({
   categoryId: z.string(),
   categoryName: z.string(),
   description: z.string().optional(),
@@ -14,8 +14,8 @@ const ProductManagementProductsCategorySchema = z.object({
   updated: z.date()
 });
 
-const ProductManagementProductsCategoryResponseSchema = z.object({
-  data: z.array(ProductManagementProductsCategorySchema),
+const ProductManagementCategoriesCategoryResponseSchema = z.object({
+  data: z.array(ProductManagementCategoriesCategorySchema),
   nextCursorPointer: z.object({
     SK: z.string(),
     PK: z.string(),
@@ -37,7 +37,7 @@ export const categories = c.router({
     method: 'GET',
     path: '/api/categories',
     responses: {
-      200: ProductManagementProductsCategoryResponseSchema,
+      200: ProductManagementCategoriesCategoryResponseSchema,
       400: ErrorResponseSchema
     },
     query: PaginateQuerySchema,
@@ -51,7 +51,7 @@ export const categories = c.router({
     method: 'POST',
     path: '/api/categories',
     responses: {
-      201: ProductManagementProductsCategorySchema
+      201: ProductManagementCategoriesCategorySchema
     },
     body: z.object({
       categoryName: z.string(),

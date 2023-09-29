@@ -4,7 +4,7 @@ import {
   CategoryType,
   createDynamoDbOptionWithPKSKIndex
 } from '@apple/backend/dynamodb-onetable';
-import { ProductManagementProductsCategory, ProductManagementProductsCategoryResponse } from '@apple/shared/contracts';
+import { ProductManagementCategoriesCategory, ProductManagementCategoriesCategoryResponse } from '@apple/shared/contracts';
 
 @Injectable()
 export class BackendServiceCategoriesService {
@@ -25,7 +25,7 @@ export class BackendServiceCategoriesService {
     reverse?: boolean;
     cursorPointer?: string;
     direction?: string;
-  }): Promise<ProductManagementProductsCategoryResponse> {
+  }): Promise<ProductManagementCategoriesCategoryResponse> {
     this.logger.log('findAllCategories method called');
 
     const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
@@ -48,7 +48,7 @@ export class BackendServiceCategoriesService {
 
   // Since this function is to save a category into a database we need to ensure that the category is valid CategoryType Entity
   // Promise<Category> because this is the return requirements from the contract
-  async createCategory(categoryType: CategoryType): Promise<ProductManagementProductsCategory> {
+  async createCategory(categoryType: CategoryType): Promise<ProductManagementCategoriesCategory> {
     this.logger.log('createCategory method called');
     const createdCategory = await this.categoryTable.create(categoryType);
     this.logger.log(createdCategory);
