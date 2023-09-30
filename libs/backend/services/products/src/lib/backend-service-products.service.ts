@@ -70,7 +70,7 @@ export class BackendServiceProductsService {
   // Promise<Product> because this is the return requirements from the contract
   async createProduct(productType: ProductType): Promise<ProductManagementProductsProduct> {
     this.logger.log('createProduct method called');
-    const createdProduct = await this.productTable.create(productType);
+    const createdProduct = await this.productTable.create(productType) as ProductType;
     this.logger.log(createdProduct);
     this.logger.log(`Product created with id ${createdProduct.productId}`);
 
