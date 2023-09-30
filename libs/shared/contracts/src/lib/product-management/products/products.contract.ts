@@ -7,6 +7,9 @@ import { ErrorResponseSchema } from '../../utils/error-response.schema';
 export type ProductManagementProductsProduct = z.infer<typeof ProductManagementProductsProductSchema>;
 export type ProductManagementProductsProductResponse = z.infer<typeof ProductManagementProductsProductResponseSchema>;
 
+/*
+* This is mapped manually from the database schema
+*/
 const ProductManagementProductsProductSchema = z.object({
   productId: z.string(),
   productName: z.string(),
