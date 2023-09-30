@@ -103,4 +103,19 @@ export const products = c.router({
     strictStatusCodes: true
   },
 
+  getProductsByCategoryId: {
+    method: 'GET',
+    path: '/api/products/by-category/:id',
+    responses: {
+      200: z.array(ProductManagementProductsProductSchema)
+    },
+    summary: 'Get products by category id',
+    description: 'Get products by category id',
+    metadata: { 
+      roles: ['guest', 'user'],
+      identifierPath: 'params.id',
+    } as const,
+    strictStatusCodes: true
+  },
+
 });

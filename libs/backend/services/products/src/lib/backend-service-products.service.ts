@@ -98,4 +98,16 @@ export class BackendServiceProductsService {
     this.logger.log(`Found product with id ${product.productId}`);
     return product;
   }
+
+  async getProductsByCategoryId(categoryId: string): Promise<ProductManagementProductsProduct[]> {
+    this.logger.log('getProductsByCategoryId method called');
+    const products = await this.productTable.find(
+      {
+        GSI1PK: 'PRODUCT',
+        GSI1SK: `CATEGORY#${categoryId}`
+      }
+    );
+    this.logger.log(`Found ${products.length} products for category id ${categoryId}`);
+    return products;
+  }
 }

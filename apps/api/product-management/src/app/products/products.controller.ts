@@ -63,6 +63,16 @@ export class ProductsController {
         };
       },
 
+      getProductsByCategoryId: async ({ params }) => {
+        const products = await this.backendServiceProductsService.getProductsByCategoryId(
+          params.id
+        );
+        return {
+          status: 200,
+          body: products
+        };
+      },
+
     });
   }
 }
