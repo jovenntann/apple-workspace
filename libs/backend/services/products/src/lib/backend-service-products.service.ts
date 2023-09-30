@@ -10,7 +10,7 @@ import { ProductManagementProductsProduct, ProductManagementProductsProductRespo
 * When passing thru the services data going in should be in Database Schema if its creating a record
 * Services should be responsible for mapping the data from Database Schema to API Contract Schema
 ? This would ensure type safety from Database Schema to API Contract Schema
-* When passing thru the services data going out should be in API Contract Schema
+* When passing thru the services data going out should be in API Contract Schema (This would ensure the return is align with the contract)
 */
 
 @Injectable()

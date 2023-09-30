@@ -9,6 +9,7 @@ export type ProductManagementProductsProductResponse = z.infer<typeof ProductMan
 
 /*
 * This is mapped manually from the database schema
+? I think it would be better if we could generate this from the database schema so that we can ensure that the types are always in sync
 */
 const ProductManagementProductsProductSchema = z.object({
   productId: z.string(),
