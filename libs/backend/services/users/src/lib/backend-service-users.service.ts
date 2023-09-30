@@ -20,13 +20,13 @@ export class BackendServiceUsersService {
     this.logger.log('BackendServiceUsersService initialized');
   }
 
-  async findAllUsers(query: {
+  async getAllUsers(query: {
     limit: number;
     reverse?: boolean;
     cursorPointer?: string;
     direction?: string;
   }): Promise<UserManagementUsersUserResponse> {
-    this.logger.log('findAllUsers method called');
+    this.logger.log('getAllUsers method called');
 
     const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
       query.limit,

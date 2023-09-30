@@ -19,7 +19,7 @@ const usersClient = initClient(contract.userManagement.users, {
 
 
 async function run() {
-    const { body, status } = await client.findAllProducts({
+    const { body, status } = await client.getAllProducts({
         query: {
             limit: '10',
             reverse: 'true',
@@ -67,7 +67,7 @@ async function getProductById(id: string) {
 }
 
 async function getAllUsers() {
-    const { body, status } = await usersClient.findAllUsers();
+    const { body, status } = await usersClient.getAllUsers();
 
     if (status === 200) {
         return body;

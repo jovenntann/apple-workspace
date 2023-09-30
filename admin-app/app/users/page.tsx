@@ -8,7 +8,7 @@ const usersClient = initClient(contract.userManagement.users, {
 });
 
 async function getAllUsers() {
-    const { body, status } = await usersClient.findAllUsers({
+    const { body, status } = await usersClient.getAllUsers({
       query: {
         limit: '10',
       }

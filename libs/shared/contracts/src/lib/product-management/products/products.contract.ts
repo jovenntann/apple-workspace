@@ -37,7 +37,7 @@ const ProductManagementProductsProductResponseSchema = z.object({
 const c = initContract();
 
 export const products = c.router({
-  findAllProducts: {
+  getAllProducts: {
     method: 'GET',
     path: '/api/products',
     responses: {

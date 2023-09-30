@@ -34,7 +34,7 @@ const UserManagementUsersUserResponseSchema = z.object({
 const c = initContract();
 
 export const users = c.router({
-  findAllUsers: {
+  getAllUsers: {
     method: 'GET',
     path: '/api/users',
     responses: {
@@ -64,7 +64,7 @@ export const users = c.router({
     strictStatusCodes: true
   },
 
-  findUserById: {
+  getUserById: {
     method: 'GET',
     path: '/api/users/:id',
     responses: {

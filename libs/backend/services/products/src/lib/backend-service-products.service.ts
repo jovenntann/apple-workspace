@@ -20,13 +20,13 @@ export class BackendServiceProductsService {
     this.logger.log('BackendServiceProductsService initialized');
   }
 
-  async findAllProducts(query: {
+  async getAllProducts(query: {
     limit: number;
     reverse?: boolean;
     cursorPointer?: string;
     direction?: string;
   }): Promise<ProductManagementProductsProductResponse> {
-    this.logger.log('findAllProducts method called');
+    this.logger.log('getAllProducts method called');
 
     const dynamoDbOption = createDynamoDbOptionWithPKSKIndex(
       query.limit,
