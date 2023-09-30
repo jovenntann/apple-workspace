@@ -37,15 +37,16 @@ export class UsersController {
         };
       },
 
-    //   getUserById: async ({ params }) => {
-    //     const user = await this.backendServiceUsersService.getUserById(
-    //       params.id
-    //     );
-    //     return {
-    //       status: 200,
-    //       body: user
-    //     };
-    //   },
+      findUserById: async ({ params }) => {
+        const user = await this.backendServiceUsersService.getUserById(
+          params.id
+        );
+        return {
+          status: 200,
+          body: user
+        };
+      },
+
     });
   }
 }

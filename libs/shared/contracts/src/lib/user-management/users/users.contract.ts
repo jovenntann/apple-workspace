@@ -63,4 +63,20 @@ export const users = c.router({
     metadata: { roles: ['admin'] } as const,
     strictStatusCodes: true
   },
+
+  findUserById: {
+    method: 'GET',
+    path: '/api/users/:id',
+    responses: {
+      200: UserManagementUsersUserSchema,
+      404: ErrorResponseSchema,
+    },
+    summary: 'Find user by id',
+    description: 'Find user by id',
+    metadata: { 
+      roles: ['admin'],
+      identifierPath: 'params.id',
+    } as const,
+    strictStatusCodes: true
+  },
 });
