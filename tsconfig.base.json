@@ -14,7 +14,24 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@apple/backend/dynamodb-onetable": [
+        "libs/backend/dynamodb-onetable/src/index.ts"
+      ],
+      "@apple/backend/services/categories": [
+        "libs/backend/services/categories/src/index.ts"
+      ],
+      "@apple/backend/services/products": [
+        "libs/backend/services/products/src/index.ts"
+      ],
+      "@apple/backend/services/users": [
+        "libs/backend/services/users/src/index.ts"
+      ],
+      "@apple/shared/contracts": ["libs/shared/contracts/src/index.ts"],
+      "@apple/shared/dto": ["libs/shared/dto/src/index.ts"]
+    },
+    "strictPropertyInitialization": false,
+    "strict": true
   },
   "exclude": ["node_modules", "tmp"]
 }

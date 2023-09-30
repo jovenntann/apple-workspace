@@ -40,6 +40,3 @@ Thumbs.db
 
 # Docker FIles
 docker/
-
-# Next.js
-.next
