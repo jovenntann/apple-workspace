@@ -47,7 +47,3 @@ export async function testCreateUser() {
   const user = await createUser(userData);
   console.log(user);
 }
-
-
-
-

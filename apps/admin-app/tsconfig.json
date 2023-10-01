@@ -16,20 +16,16 @@
         "name": "next"
       }
     ],
-    "types": [
-      "jest",
-      "node"
-    ]
+    "types": ["jest", "node"]
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    "../admin-app/.next/types/**/*.ts",
-    "../dist/admin-app/.next/types/**/*.ts",
-    "next-env.d.ts",
-    "../../admin-app/.next/types/**/*.ts"
+    "../../apps/admin-app/.next/types/**/*.ts",
+    "../../dist/apps/admin-app/.next/types/**/*.ts",
+    "next-env.d.ts"
   ],
   "exclude": [
     "node_modules",

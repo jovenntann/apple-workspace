@@ -45,4 +45,3 @@ async function testCreateProduct() {
   console.log(product);
 }
 testCreateProduct();
-
