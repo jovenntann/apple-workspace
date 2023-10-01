@@ -17,6 +17,7 @@ export type ProductManagementProductsProductResponse = z.infer<typeof ProductMan
 const BaseProductSchema = z.object({
   productName: z.string(),
   brand: z.string(),
+  image: z.string(),
   description: z.string().optional(),
   price: z.number(),
   stock: z.number(),

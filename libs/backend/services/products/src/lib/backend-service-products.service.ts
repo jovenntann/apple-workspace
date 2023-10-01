@@ -143,6 +143,7 @@ function mapProductTypeToProductManagementProductsProduct(product: ProductType):
     productId: product.productId ?? '' ,
     productName: product.productName,
     brand: product.brand,
+    image: product.image,
     description: product.description,
     price: product.price,
     stock: product.stock,

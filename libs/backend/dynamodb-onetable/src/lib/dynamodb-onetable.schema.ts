@@ -31,6 +31,7 @@ export const Schema = {
       productId: { type: String, generate: 'ulid' },
       productName: { type: String, required: true },
       brand: { type: String, required: true },
+      image: { type: String, required: true },
       price: { type: Number, required: true },
       description: { type: String },
       stock: { type: Number, required: true },
