@@ -72,6 +72,8 @@ function mapUserTypeToUserManagementUsersUser(user: UserType): UserManagementUse
     userId: user.userId ?? '',
     username: user.username,
     email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
     // If the created date is not available, the current date is used as the default value.
     created: user.created ?? new Date(),
     // If the updated date is not available, the current date is used as the default value.

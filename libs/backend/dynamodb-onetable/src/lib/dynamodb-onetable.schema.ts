@@ -18,6 +18,8 @@ export const Schema = {
       userId: { type: String, generate: 'ulid' },
       username: { type: String, required: true },
       email: { type: String, required: true },
+      firstName: { type: String, required: true },
+      lastName: { type: String, required: true },
       created: { type: Date, timestamp: true },
       updated: { type: Date, timestamp: true },
     },

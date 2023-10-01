@@ -39,13 +39,14 @@ export async function createUser(userData: UserManagementUsersCreateUser) {
 export async function testCreateUser() {
   const userData: UserManagementUsersCreateUser = {
     username: 'testUser',
-    email: 'testUser@example.com'
+    email: 'testUser@example.com',
+    firstName: 'Test',
+    lastName: 'User'
   };
 
   const user = await createUser(userData);
   console.log(user);
 }
-
 
 
 

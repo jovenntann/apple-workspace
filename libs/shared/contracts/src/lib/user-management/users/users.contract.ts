@@ -11,6 +11,8 @@ export type UserManagementUsersUserResponse = z.infer<typeof UserManagementUsers
 const BaseUserSchema = z.object({
   username: z.string(),
   email: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
 });
 
 const UserManagementUsersUserSchema = BaseUserSchema.extend({
