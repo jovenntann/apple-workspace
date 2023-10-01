@@ -5,18 +5,30 @@ import { PaginateQuerySchema } from '../../utils/paginate-query.schema';
 import { ErrorResponseSchema } from '../../utils/error-response.schema';
 
 export type ProductManagementProductsProduct = z.infer<typeof ProductManagementProductsProductSchema>;
+export type ProductManagementProductsCreateProduct = z.infer<typeof ProductManagementProductsCreateProductSchema>;
 export type ProductManagementProductsProductResponse = z.infer<typeof ProductManagementProductsProductResponseSchema>;
 
-const ProductManagementProductsProductSchema = z.object({
-  productId: z.string(),
+/*
+* This is mapped manually from the database schema
+? I think it would be better if we could generate this from the database schema so that we can ensure that the types are always in sync
+*/
+
+// * This is mapped from the Database schema specifically for the required fields
+const BaseProductSchema = z.object({
   productName: z.string(),
   description: z.string().optional(),
   price: z.number(),
   stock: z.number(),
-  categoryId: z.string(),
+  categoryId: z.string()
+});
+
+const ProductManagementProductsProductSchema = BaseProductSchema.extend({
+  productId: z.string(),
   created: z.date(),
   updated: z.date()
 });
+
+const ProductManagementProductsCreateProductSchema = BaseProductSchema;
 
 const ProductManagementProductsProductResponseSchema = z.object({
   data: z.array(ProductManagementProductsProductSchema),
@@ -37,7 +49,7 @@ const ProductManagementProductsProductResponseSchema = z.object({
 const c = initContract();
 
 export const products = c.router({
-  findAllProducts: {
+  getAllProducts: {
     method: 'GET',
     path: '/api/products',
     responses: {
@@ -57,13 +69,7 @@ export const products = c.router({
     responses: {
       201: ProductManagementProductsProductSchema
     },
-    body: z.object({
-      productName: z.string(),
-      description: z.string().optional(),
-      price: z.number(),
-      stock: z.number(),
-      categoryId: z.string()
-    }),
+    body: ProductManagementProductsCreateProductSchema,
     summary: 'Create a new product',
     description: 'Create a new product',
     metadata: { roles: ['user'] } as const,
@@ -96,6 +102,22 @@ export const products = c.router({
     },
     summary: 'Get product by id',
     description: 'Get product by id',
+    metadata: { 
+      roles: ['guest', 'user'],
+      identifierPath: 'params.id',
+    } as const,
+    strictStatusCodes: true
+  },
+
+  getProductsByCategoryId: {
+    method: 'GET',
+    path: '/api/products/by-category/:id',
+    responses: {
+      200: z.array(ProductManagementProductsProductSchema),
+      400: ErrorResponseSchema
+    },
+    summary: 'Get products by category id',
+    description: 'Get products by category id',
     metadata: { 
       roles: ['guest', 'user'],
       identifierPath: 'params.id',

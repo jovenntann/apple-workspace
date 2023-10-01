@@ -13,9 +13,9 @@ export class ProductsController {
   @TsRestHandler(contract.productManagement.products)
   async handler() {
     return tsRestHandler(contract.productManagement.products, {
-      findAllProducts: async ({ query }) => {
+      getAllProducts: async ({ query }) => {
         const { data, nextCursorPointer, prevCursorPointer } =
-          await this.backendServiceProductsService.findAllProducts({
+          await this.backendServiceProductsService.getAllProducts({
             limit: query.limit,
             reverse: query.reverse,
             cursorPointer: query?.cursorPointer,
@@ -60,6 +60,16 @@ export class ProductsController {
         return {
           status: 200,
           body: product
+        };
+      },
+
+      getProductsByCategoryId: async ({ params }) => {
+        const products = await this.backendServiceProductsService.getProductsByCategoryId(
+          params.id
+        );
+        return {
+          status: 200,
+          body: products
         };
       },
 

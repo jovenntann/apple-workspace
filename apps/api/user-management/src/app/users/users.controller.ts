@@ -13,9 +13,9 @@ export class UsersController {
   @TsRestHandler(contract.userManagement.users)
   async handler() {
     return tsRestHandler(contract.userManagement.users, {
-      findAllUsers: async ({ query }) => {
+      getAllUsers: async ({ query }) => {
         const { data, nextCursorPointer, prevCursorPointer } =
-          await this.backendServiceUsersService.findAllUsers({
+          await this.backendServiceUsersService.getAllUsers({
             limit: query.limit,
             reverse: query.reverse,
             cursorPointer: query?.cursorPointer,
@@ -37,7 +37,7 @@ export class UsersController {
         };
       },
 
-      findUserById: async ({ params }) => {
+      getUserById: async ({ params }) => {
         const user = await this.backendServiceUsersService.getUserById(
           params.id
         );
