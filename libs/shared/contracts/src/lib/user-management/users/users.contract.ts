@@ -5,15 +5,21 @@ import { PaginateQuerySchema } from '../../utils/paginate-query.schema';
 import { ErrorResponseSchema } from '../../utils/error-response.schema';
 
 export type UserManagementUsersUser = z.infer<typeof UserManagementUsersUserSchema>;
+export type UserManagementUsersCreateUser = z.infer<typeof UserManagementUsersCreateUserSchema>;
 export type UserManagementUsersUserResponse = z.infer<typeof UserManagementUsersUserResponseSchema>;
 
-const UserManagementUsersUserSchema = z.object({
-  userId: z.string(),
+const BaseUserSchema = z.object({
   username: z.string(),
   email: z.string(),
+});
+
+const UserManagementUsersUserSchema = BaseUserSchema.extend({
+  userId: z.string(),
   created: z.date(),
   updated: z.date()
 });
+
+const UserManagementUsersCreateUserSchema = BaseUserSchema;
 
 const UserManagementUsersUserResponseSchema = z.object({
   data: z.array(UserManagementUsersUserSchema),
@@ -54,10 +60,7 @@ export const users = c.router({
     responses: {
       201: UserManagementUsersUserSchema,
     },
-    body: z.object({
-      username: z.string(),
-      email: z.string(),
-    }),
+    body: UserManagementUsersCreateUserSchema,
     summary: 'Create a new user',
     description: 'Create a new user',
     metadata: { roles: ['admin'] } as const,
