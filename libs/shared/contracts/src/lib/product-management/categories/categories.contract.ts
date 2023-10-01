@@ -1,7 +1,7 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { PaginateQuerySchema } from '../../utils/paginate-query.schema';
-import { ErrorResponseSchema } from '../../utils/error-response.schema';
+import { PaginateQuerySchema } from '../../../schema/paginate-query.schema';
+import { ErrorResponseSchema } from '../../../schema/error-response.schema';
 
 export type ProductManagementCategoriesCategory = z.infer<typeof ProductManagementCategoriesCategorySchema>;
 export type ProductManagementCategoriesCreateCategory = z.infer<typeof ProductManagementCategoriesCreateCategorySchema>;
