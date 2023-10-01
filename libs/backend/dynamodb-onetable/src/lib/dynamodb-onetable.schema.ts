@@ -30,6 +30,7 @@ export const Schema = {
       GSI2SK: { type: Date, value: '${created}' }, // To query all products between date ranges
       productId: { type: String, generate: 'ulid' },
       productName: { type: String, required: true },
+      brand: { type: String, required: true },
       price: { type: Number, required: true },
       description: { type: String },
       stock: { type: Number, required: true },

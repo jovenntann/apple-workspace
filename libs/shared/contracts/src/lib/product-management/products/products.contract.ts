@@ -16,6 +16,7 @@ export type ProductManagementProductsProductResponse = z.infer<typeof ProductMan
 // * This is mapped from the Database schema specifically for the required fields
 const BaseProductSchema = z.object({
   productName: z.string(),
+  brand: z.string(),
   description: z.string().optional(),
   price: z.number(),
   stock: z.number(),
