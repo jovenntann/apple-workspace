@@ -147,6 +147,7 @@ function mapProductTypeToProductManagementProductsProduct(product: ProductType):
     description: product.description,
     price: product.price,
     stock: product.stock,
+    is_available: product.is_available,
     categoryId: product.categoryId,
     // If the created date is not available, the current date is used as the default value.
     created: product.created ?? new Date(),

@@ -21,6 +21,7 @@ const BaseProductSchema = z.object({
   description: z.string().optional(),
   price: z.number(),
   stock: z.number(),
+  is_available: z.boolean(),
   categoryId: z.string()
 });
 
