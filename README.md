@@ -86,3 +86,49 @@ Run All Apps
 ```
 nx run-many --target=serve --all --maxParallel=100 
 ```
+
+### Code Structure
+
+```mermaid
+graph TD;
+
+  subgraph "Contracts Layer"
+    Contract[Contract] --> ProductManagement[Product Management]
+    Contract --> UserManagement[User Management]
+  end
+
+  subgraph "Client Layer"
+    ProductsClient[Products Client] -->|Uses| Contract
+    UserClient[User Client] -->|Uses| Contract
+  end
+
+  subgraph "Controller Layer"
+    ProductsController[Products Controller] -->|Uses| Contract
+    UsersController[Users Controller] -->|Uses| Contract
+  end
+
+  subgraph "Service Layer"
+    BackendServiceProductsService[Backend Service Products Service] --> DynamoDbService[DynamoDB Service]
+    BackendServiceProductsService -->|Uses| Contract
+    BackendServiceUserService[Backend Service User Service] --> DynamoDbService
+    BackendServiceUserService -->|Uses| Contract
+  end
+  
+  subgraph "Data Layer"
+    DynamoDbService --> Dynamo[Dynamo]
+  end
+  
+  %% Linking Controller and Service
+  ProductsController -->|Utilizes| BackendServiceProductsService
+  UsersController -->|Utilizes| BackendServiceUserService
+  
+  style Contract fill:#f9d,stroke:#333,stroke-width:2px;
+  style ProductsClient fill:#ccf,stroke:#333,stroke-width:2px;
+  style UserClient fill:#ccf,stroke:#333,stroke-width:2px;
+  style ProductsController fill:#cfc,stroke:#333,stroke-width:2px;
+  style UsersController fill:#cfc,stroke:#333,stroke-width:2px;
+  style BackendServiceProductsService fill:#fcc,stroke:#333,stroke-width:2px;
+  style BackendServiceUserService fill:#fcc,stroke:#333,stroke-width:2px;
+  style DynamoDbService fill:#ffc,stroke:#333,stroke-width:2px;
+  style Dynamo fill:#cff,stroke:#333,stroke-width:2px;
+```

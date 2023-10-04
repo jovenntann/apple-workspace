@@ -1,8 +1,8 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 
-import { PaginateQuerySchema } from '../../utils/paginate-query.schema';
-import { ErrorResponseSchema } from '../../utils/error-response.schema';
+import { PaginateQuerySchema } from '../../../schema/paginate-query.schema';
+import { ErrorResponseSchema } from '../../../schema/error-response.schema';
 
 export type ProductManagementProductsProduct = z.infer<typeof ProductManagementProductsProductSchema>;
 export type ProductManagementProductsCreateProduct = z.infer<typeof ProductManagementProductsCreateProductSchema>;
@@ -16,9 +16,12 @@ export type ProductManagementProductsProductResponse = z.infer<typeof ProductMan
 // * This is mapped from the Database schema specifically for the required fields
 const BaseProductSchema = z.object({
   productName: z.string(),
+  brand: z.string(),
+  image: z.string(),
   description: z.string().optional(),
   price: z.number(),
   stock: z.number(),
+  is_available: z.boolean(),
   categoryId: z.string()
 });
 

@@ -46,18 +46,8 @@ export class BackendServiceProductsService {
     const products = await this.productTable.find({}, dynamoDbOption);
     this.logger.log(`Found ${products.length} products`);
 
-    const mappedProducts = products.map((products: ProductType) => {
-      return {
-        productId: products.productId,
-        productName: products.productName,
-        description: products.description,
-        price: products.price,
-        stock: products.stock,
-        categoryId: products.categoryId,
-        created: products.created,
-        updated: products.updated
-      } as ProductManagementProductsProduct;
-    });
+    // * This will give us flexibility on what are the fields that we want to return
+    const mappedProducts = products.map(mapProductTypeToProductManagementProductsProduct);
       
     return {
       data: mappedProducts,
@@ -75,16 +65,7 @@ export class BackendServiceProductsService {
     this.logger.log(`Product created with id ${createdProduct.productId}`);
 
     // This will give us type safety from productType (Database) to ProductManagementProductsProduct (API Response / Contract)
-    return {
-      productId: createdProduct.productId,
-      productName: createdProduct.productName,
-      description: createdProduct.description,
-      price: createdProduct.price,
-      stock: createdProduct.stock,
-      categoryId: createdProduct.categoryId,
-      created: createdProduct.created,
-      updated: createdProduct.updated
-    } as ProductManagementProductsProduct;
+    return mapProductTypeToProductManagementProductsProduct(createdProduct);
   }
 
   async getProductsByDateRange(query: {
@@ -115,18 +96,7 @@ export class BackendServiceProductsService {
 
     this.logger.log(`Found ${products.length} products`);
 
-    const mappedProducts = products.map((products: ProductType) => {
-      return {
-        productId: products.productId,
-        productName: products.productName,
-        description: products.description,
-        price: products.price,
-        stock: products.stock,
-        categoryId: products.categoryId,
-        created: products.created,
-        updated: products.updated
-      } as ProductManagementProductsProduct;
-    });
+    const mappedProducts = products.map(mapProductTypeToProductManagementProductsProduct);
 
     return {
       data: mappedProducts,
@@ -141,16 +111,7 @@ export class BackendServiceProductsService {
     this.logger.log(`Found product with id ${product.productId}`);
     
     // This will give us type safety from productType (Database) to ProductManagementProductsProduct (API Response / Contract)
-    return {
-      productId: product.productId,
-      productName: product.productName,
-      description: product.description,
-      price: product.price,
-      stock: product.stock,
-      categoryId: product.categoryId,
-      created: product.created,
-      updated: product.updated
-    } as ProductManagementProductsProduct;
+    return mapProductTypeToProductManagementProductsProduct(product);
   }
 
   async getProductsByCategoryId(categoryId: string): Promise<ProductManagementProductsProduct[]> {
@@ -163,20 +124,34 @@ export class BackendServiceProductsService {
     ) as ProductType[];
 
     // This will give us type safety from productType (Database) to ProductManagementProductsProduct (API Response / Contract)
-    const mappedProducts = products.map(product => {
-      return {
-        productId: product.productId,
-        productName: product.productName,
-        description: product.description,
-        price: product.price,
-        stock: product.stock,
-        categoryId: product.categoryId,
-        created: product.created,
-        updated: product.updated
-      } as ProductManagementProductsProduct;
-    });
+    const mappedProducts = products.map(mapProductTypeToProductManagementProductsProduct);
 
     this.logger.log(`Found ${products.length} products for category id ${categoryId}`);
     return mappedProducts;
   }
+}
+
+/*
+? Why do we need this? 
+* Because we need to ensure that the data that we are returning is align with the contract
+* This function maps the product type to the product management products product type.
+* It handles optional fields by providing default values.
+*/
+function mapProductTypeToProductManagementProductsProduct(product: ProductType): ProductManagementProductsProduct {
+  return {
+    // If the product ID is not available, an empty string is used as the default value.
+    productId: product.productId ?? '' ,
+    productName: product.productName,
+    brand: product.brand,
+    image: product.image,
+    description: product.description,
+    price: product.price,
+    stock: product.stock,
+    is_available: product.is_available,
+    categoryId: product.categoryId,
+    // If the created date is not available, the current date is used as the default value.
+    created: product.created ?? new Date(),
+    // If the updated date is not available, the current date is used as the default value.
+    updated: product.updated ?? new Date()
+  };
 }

@@ -3,7 +3,7 @@
     "plugin:@nx/react-typescript",
     "next",
     "next/core-web-vitals",
-    "../.eslintrc.json"
+    "../../.eslintrc.json"
   ],
   "ignorePatterns": ["!**/*", ".next/**/*"],
   "overrides": [
@@ -16,7 +16,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@next/next/no-html-link-for-pages": ["error", "admin-app/pages"]
+        "@next/next/no-html-link-for-pages": ["error", "apps/admin-app/pages"]
       }
     },
     {

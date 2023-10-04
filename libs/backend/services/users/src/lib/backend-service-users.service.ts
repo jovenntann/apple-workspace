@@ -39,8 +39,10 @@ export class BackendServiceUsersService {
     const users = await this.userTable.find({}, dynamoDbOption);
     this.logger.log(`Found ${users.length} users`);
 
+    const mappedUsers = users.map(mapUserTypeToUserManagementUsersUser);
+
     return {
-      data: users,
+      data: mappedUsers,
       nextCursorPointer: users.next,
       prevCursorPointer: users.prev
     };
@@ -52,13 +54,29 @@ export class BackendServiceUsersService {
     this.logger.log(createdUser);
     this.logger.log(`User created with id ${createdUser.userId}`);
 
-    return createdUser;
+    return mapUserTypeToUserManagementUsersUser(createdUser);
   }
 
   async getUserById(userId: string): Promise<UserManagementUsersUser> {
     this.logger.log('getUserById method called');
     const user = await this.userTable.get({ userId });
     this.logger.log(`Found user with id ${user.userId}`);
-    return user;
+
+    return mapUserTypeToUserManagementUsersUser(user);
   }
+}
+
+function mapUserTypeToUserManagementUsersUser(user: UserType): UserManagementUsersUser {
+  return {
+    // If the user ID is not available, an empty string is used as the default value.
+    userId: user.userId ?? '',
+    username: user.username,
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    // If the created date is not available, the current date is used as the default value.
+    created: user.created ?? new Date(),
+    // If the updated date is not available, the current date is used as the default value.
+    updated: user.updated ?? new Date()
+  };
 }

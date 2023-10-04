@@ -30,3 +30,20 @@ export async function createProduct(productData: ProductManagementProductsCreate
     return body;
   }
 }
+
+async function testCreateProduct() {
+  const productData: ProductManagementProductsCreateProduct = {
+    productName: 'Test Product',
+    brand: 'Test Brand',
+    image: 'http://test.com/image.jpg',
+    price: 100,
+    stock: 50,
+    is_available: true,
+    categoryId: '1',
+    description: 'Test Description'
+  };
+
+  const product = await createProduct(productData);
+  console.log(product);
+}
+testCreateProduct();
