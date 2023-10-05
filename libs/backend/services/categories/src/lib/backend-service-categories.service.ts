@@ -71,6 +71,7 @@ function mapCategoryTypeToProductManagementCategoriesCategory(category: Category
     // If the category ID is not available, an empty string is used as the default value.
     categoryId: category.categoryId ?? '' ,
     categoryName: category.categoryName,
+    title: category.title,
     description: category.description,
     // If the created date is not available, the current date is used as the default value.
     created: category.created ?? new Date(),

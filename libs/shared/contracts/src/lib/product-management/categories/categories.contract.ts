@@ -9,7 +9,8 @@ export type ProductManagementCategoriesCategoryResponse = z.infer<typeof Product
 
 const BaseCategorySchema = z.object({
   categoryName: z.string(),
-  description: z.string().optional()
+  description: z.string().optional(),
+  title: z.string(),
 });
 
 const ProductManagementCategoriesCategorySchema = BaseCategorySchema.extend({

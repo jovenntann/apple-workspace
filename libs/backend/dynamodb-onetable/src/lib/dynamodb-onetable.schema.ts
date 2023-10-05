@@ -53,6 +53,7 @@ export const Schema = {
       GSI1SK: { type: String, value: '${categoryName}' }, 
       categoryId: { type: String, generate: 'ulid', },
       categoryName: { type: String, required: true },
+      title: { type: String, required: true },
       description: { type: String },
       created: { type: Date, timestamp: true },
       updated: { type: Date, timestamp: true },
