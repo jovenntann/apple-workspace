@@ -119,3 +119,7 @@ The flowchart describes the architecture of an application structured into multi
 **Additional Notes:**
 - The Controllers use the Backend Services for executing business logic.
 - The architecture is designed in such a way that each layer has a specific role and responsibility, contributing to a modular, maintainable, and scalable system. It heavily relies on contracts as the source of truth, ensuring uniformity and coherence throughout the application.
+
+**Running the Application Locally:**
+1. Run `docker-compose up` to initiate the database instance.
+2. Run `nx serve product-management` to start the application.
