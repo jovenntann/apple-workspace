@@ -11,9 +11,13 @@ export const Schema = {
   },
   models: {
     User: {
+      /* 
+      ? User Access Patterns:
+      * Get a user by userId: Using the primary index with PK = 'USER' and SK = '${userId}'.
+      * Query users by email: Using GSI1 with GSI1PK = 'USER' and GSI1SK = '${email}'.
+      */
       PK: { type: String, value: 'USER' },
       SK: { type: String, value: '${userId}' },
-      // To query users by email
       GSI1PK: { type: String, value: 'USER' },
       GSI1SK: { type: String, value: '${email}' }, 
       userId: { type: String, generate: 'ulid' },
@@ -25,12 +29,16 @@ export const Schema = {
       updated: { type: Date, timestamp: true },
     },
     Product: {
+      /* 
+      ? Product Access Patterns:
+      * Get a product by productId: Using the primary index with PK = 'PRODUCT' and SK = '${productId}'.
+      * Query all products by category ID: Using GSI1 with GSI1PK = 'PRODUCT' and GSI1SK = 'CATEGORY#${categoryId}'.
+      * Query all products between date ranges: Using GSI2 with GSI2PK = 'PRODUCT' and GSI2SK between the desired date range.
+      */
       PK: { type: String, value: 'PRODUCT' },
       SK: { type: String, value: '${productId}' },
-      // To query all Products by Category ID and #CATEGORY would help on easily identifying that this is a category
       GSI1PK: { type: String, value: 'PRODUCT' },
       GSI1SK: { type: String, value: 'CATEGORY#${categoryId}' }, 
-      // To query all products between date ranges
       GSI2PK: { type: String, value: 'PRODUCT' },
       GSI2SK: { type: Date, value: '${created}' }, 
       productId: { type: String, generate: 'ulid' },
@@ -46,9 +54,13 @@ export const Schema = {
       categoryId: { type: String, required: true },
     },
     Category: {
+      /* 
+      ? Category Access Patterns:
+      * Get a category by categoryId: Using the primary index with PK = 'CATEGORY' and SK = '${categoryId}'.
+      * Query categories by name: Using GSI1 with GSI1PK = 'CATEGORY' and GSI1SK = '${categoryName}'.
+      */
       PK: { type: String, value: 'CATEGORY' },
       SK: { type: String, value: '${categoryId}' },
-      // To query categories by name
       GSI1PK: { type: String, value: 'CATEGORY' },
       GSI1SK: { type: String, value: '${categoryName}' }, 
       categoryId: { type: String, generate: 'ulid', },
