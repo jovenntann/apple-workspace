@@ -53,15 +53,15 @@ graph TD;
   ProductsController -->|Utilizes| BackendServiceProductsService
   UsersController -->|Utilizes| BackendServiceUserService
   
-  style Contract fill:#444,stroke:#333,stroke-width:2px;
-  style ProductsClient fill:#444,stroke:#333,stroke-width:2px;
-  style UserClient fill:#444,stroke:#333,stroke-width:2px;
-  style ProductsController fill:#444,stroke:#333,stroke-width:2px;
-  style UsersController fill:#444,stroke:#333,stroke-width:2px;
-  style BackendServiceProductsService fill:#444,stroke:#333,stroke-width:2px;
-  style BackendServiceUserService fill:#444,stroke:#333,stroke-width:2px;
-  style DynamoDbService fill:#444,stroke:#333,stroke-width:2px;
-  style Dynamo fill:#444,stroke:#333,stroke-width:2px;
+  style Contract fill:#f9d,stroke:#333,stroke-width:2px;
+  style ProductsClient fill:#ccf,stroke:#333,stroke-width:2px;
+  style UserClient fill:#ccf,stroke:#333,stroke-width:2px;
+  style ProductsController fill:#cfc,stroke:#333,stroke-width:2px;
+  style UsersController fill:#cfc,stroke:#333,stroke-width:2px;
+  style BackendServiceProductsService fill:#fcc,stroke:#333,stroke-width:2px;
+  style BackendServiceUserService fill:#fcc,stroke:#333,stroke-width:2px;
+  style DynamoDbService fill:#ffc,stroke:#333,stroke-width:2px;
+  style Dynamo fill:#cff,stroke:#333,stroke-width:2px;
 ```
 
 The flowchart describes the architecture of an application structured into multiple layers, including Contracts, Client, Controller, Service, and Data layers. Here's a detailed breakdown:
