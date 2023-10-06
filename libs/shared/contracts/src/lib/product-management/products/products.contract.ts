@@ -31,6 +31,8 @@ const ProductManagementProductsProductSchema = BaseProductSchema.extend({
   updated: z.date()
 });
 
+// * You might notice that this is the same with BaseProductSchema but without the productId, created, and updated fields
+// * The purpose of this is so that we can customize the fields that we want to be required when creating a new product
 const ProductManagementProductsCreateProductSchema = BaseProductSchema;
 
 const ProductManagementProductsProductResponseSchema = z.object({
