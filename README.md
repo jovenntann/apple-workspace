@@ -1,6 +1,4 @@
-
-
-### Tech Stack
+### Libraries
 
 This project uses a variety of technologies and libraries to provide a robust and scalable application. Here's a brief overview:
 
@@ -14,8 +12,6 @@ This project uses a variety of technologies and libraries to provide a robust an
 - **Class Transformer**: A library that helps to create a correct TypeScript models with classes and decorators.
 - **Class Validator**: A validation library for TypeScript that uses decorators.
 - **RxJS**: A library for reactive programming using Observables, to make it easier to compose asynchronous or callback-based code.
-
-
 
 
 ### Code Structure
