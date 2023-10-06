@@ -31,9 +31,6 @@ A few links to help you get started:
 - [Official Nx YouTube Channel](https://www.youtube.com/@NxDevtools)
 - [Blog Posts About Nx](https://blog.nrwl.io/nx/home)
 
-<p style="text-align: center;"><a href="https://nx.dev/#learning-materials" target="_blank" rel="noreferrer"><img src="./images/nx-courses-and-videos.svg" 
-width="100%" alt="Nx - Smart, Fast and Extensible Build System"></a></p>
-
 ### Libraries
 
 This project uses a variety of technologies and libraries to provide a robust and scalable application. Here's a brief overview:
