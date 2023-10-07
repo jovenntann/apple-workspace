@@ -51,6 +51,9 @@ const product: BaseProductType = {
 };
 const isProductCompatible = isBaseProductSchemaCompatible(product);
 console.log('isProductCompatible', isProductCompatible)
+/*
+End of typesafety from Contract to Database Schema
+*/
 
 const ProductManagementProductsProductSchema = BaseProductSchema.extend({
   productId: z.string(),
