@@ -27,6 +27,8 @@ export class ProductsController {
         };
       },
 
+      // * This creates important role on typesafety between the contract and database schema
+      // * because this will ensure that the contract BaseSchema would follow the required fields from the database schema
       createProduct: async ({ body }) => {
         const product = await this.backendServiceProductsService.createProduct(
           body

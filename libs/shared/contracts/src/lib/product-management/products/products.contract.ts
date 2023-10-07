@@ -1,6 +1,8 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 
+import { ProductType } from '@apple/backend/dynamodb-onetable';
+
 import { PaginateQuerySchema } from '../../../schema/paginate-query.schema';
 import { ErrorResponseSchema } from '../../../schema/error-response.schema';
 
@@ -24,6 +26,31 @@ const BaseProductSchema = z.object({
   is_available: z.boolean(),
   categoryId: z.string()
 });
+
+/* 
+* This would serve as our typesafety from Contract to Database Schema
+* This would cause chain of errors if the database schema is not compatible with the contract
+* After updating the Database Schema it would throw an error from isBaseProductSchemaCompatible(product) because we need to update the date field from `product: BaseProductType`
+* After updating the product.field it would throw another error because it didn't match the BaseProductSchema
+* After updating the BaseProductSchema it would throw another error to the client because it's not incompatible with the contract
+*/
+const isBaseProductSchemaCompatible = (product: ProductType): boolean => {
+  const result = BaseProductSchema.safeParse(product);
+  return result.success;
+};
+export type BaseProductType = z.infer<typeof BaseProductSchema>;
+const product: BaseProductType = {
+  productName: '',
+  brand: '',
+  image: '',
+  description: '',
+  price: 100,
+  stock: 100,
+  is_available: true,
+  categoryId: ''
+};
+const isProductCompatible = isBaseProductSchemaCompatible(product);
+console.log('isProductCompatible', isProductCompatible)
 
 const ProductManagementProductsProductSchema = BaseProductSchema.extend({
   productId: z.string(),
