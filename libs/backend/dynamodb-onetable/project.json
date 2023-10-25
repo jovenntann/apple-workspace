@@ -4,11 +4,25 @@
   "sourceRoot": "libs/backend/dynamodb-onetable/src",
   "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/backend/dynamodb-onetable",
+        "tsConfig": "libs/backend/dynamodb-onetable/tsconfig.lib.json",
+        "packageJson": "libs/backend/dynamodb-onetable/package.json",
+        "main": "libs/backend/dynamodb-onetable/src/index.ts",
+        "assets": ["libs/backend/dynamodb-onetable/*.md"]
+      }
+    },
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/backend/dynamodb-onetable/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/backend/dynamodb-onetable/**/*.ts",
+          "libs/backend/dynamodb-onetable/package.json"
+        ]
       }
     },
     "test": {
