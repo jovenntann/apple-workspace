@@ -38,7 +38,7 @@ async function testCreateProduct() {
     image: 'http://test.com/image.jpg',
     price: 100,
     stock: 50,
-    is_available: true,
+    isAvailable: true,
     categoryId: '1',
     description: 'Test Description'
   };

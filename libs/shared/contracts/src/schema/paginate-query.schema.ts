@@ -5,9 +5,10 @@ export const PaginateQuerySchema = z.object({
   limit: z
     .string()
     .optional()
+    .default('10')
     .transform((val) => {
       if (isNaN(Number(val))) {
-        return 0;
+        return 10;
       }
       return Number(val);
     })

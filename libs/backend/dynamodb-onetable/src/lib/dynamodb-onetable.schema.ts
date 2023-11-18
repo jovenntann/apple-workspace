@@ -48,7 +48,7 @@ export const Schema = {
       price: { type: Number, required: true },
       description: { type: String },
       stock: { type: Number, required: true },
-      is_available: { type: Boolean, required: true },
+      isAvailable: { type: Boolean, required: true },
       created: { type: Date, timestamp: true },
       updated: { type: Date, timestamp: true },
       categoryId: { type: String, required: true },

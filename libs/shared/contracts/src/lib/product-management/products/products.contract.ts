@@ -23,7 +23,7 @@ const BaseProductSchema = z.object({
   description: z.string().optional(),
   price: z.number(),
   stock: z.number(),
-  is_available: z.boolean(),
+  isAvailable: z.boolean(),
   categoryId: z.string()
 });
 
@@ -46,7 +46,7 @@ const product: BaseProductType = {
   description: '',
   price: 100,
   stock: 100,
-  is_available: true,
+  isAvailable: true,
   categoryId: ''
 };
 const isProductCompatible = isBaseProductSchemaCompatible(product);
