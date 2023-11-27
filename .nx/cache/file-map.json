@@ -1,0 +1,938 @@
+{
+  "version": "6.0",
+  "nxVersion": "17.1.3",
+  "deps": {
+    "@aws-sdk/client-dynamodb": "^3.410.0",
+    "@nestjs/common": "^10.0.2",
+    "@nestjs/config": "^3.1.0",
+    "@nestjs/core": "^10.0.2",
+    "@nestjs/platform-express": "^10.0.2",
+    "@nestjs/swagger": "^7.1.11",
+    "@tanstack/react-query": "^4.35.3",
+    "@ts-rest/core": "^3.30.2",
+    "@ts-rest/nest": "^3.30.2",
+    "@ts-rest/open-api": "^3.30.2",
+    "@ts-rest/react-query": "^3.30.2",
+    "axios": "^1.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "dynamodb-onetable": "^2.7.0",
+    "nestjs-zod": "^3.0.0",
+    "next": "13.4.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.0",
+    "tslib": "^2.3.0",
+    "zod": "^3.22.2",
+    "@nestjs/schematics": "^10.0.1",
+    "@nestjs/testing": "^10.0.2",
+    "@nx/cypress": "17.1.3",
+    "@nx/eslint-plugin": "17.1.3",
+    "@nx/jest": "17.1.3",
+    "@nx/js": "17.1.3",
+    "@nx/linter": "17.1.3",
+    "@nx/nest": "17.1.3",
+    "@nx/next": "17.1.3",
+    "@nx/node": "17.1.3",
+    "@nx/react": "17.1.3",
+    "@nx/webpack": "17.1.3",
+    "@nx/workspace": "17.1.3",
+    "@testing-library/react": "14.0.0",
+    "@types/jest": "^29.4.0",
+    "@types/node": "18.14.2",
+    "@types/react": "18.2.24",
+    "@types/react-dom": "18.2.9",
+    "@typescript-eslint/eslint-plugin": "6.13.0",
+    "@typescript-eslint/parser": "6.13.0",
+    "babel-jest": "^29.4.1",
+    "cypress": "^13.0.0",
+    "eslint": "~8.46.0",
+    "eslint-config-next": "13.4.1",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-cypress": "^2.13.4",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-jsx-a11y": "6.7.1",
+    "eslint-plugin-react": "7.32.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "jest": "^29.4.1",
+    "jest-environment-jsdom": "^29.4.1",
+    "jest-environment-node": "^29.4.1",
+    "nx": "17.1.3",
+    "nx-cloud": "16.5.2",
+    "prettier": "^2.6.2",
+    "ts-jest": "^29.1.0",
+    "ts-node": "10.9.1",
+    "typescript": "5.2.2"
+  },
+  "pathMappings": {
+    "@apple/backend/dynamodb-onetable": [
+      "libs/backend/dynamodb-onetable/src/index.ts"
+    ],
+    "@apple/backend/services/categories": [
+      "libs/backend/services/categories/src/index.ts"
+    ],
+    "@apple/backend/services/products": [
+      "libs/backend/services/products/src/index.ts"
+    ],
+    "@apple/backend/services/users": [
+      "libs/backend/services/users/src/index.ts"
+    ],
+    "@apple/shared/contracts": [
+      "libs/shared/contracts/src/index.ts"
+    ],
+    "@apple/shared/dto": [
+      "libs/shared/dto/src/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".cursorignore",
+        "hash": "3230584109168424812"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": ".env.local",
+        "hash": "14182868368000663698"
+      },
+      {
+        "file": ".eslintignore",
+        "hash": "7663861978715868291"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "18315524891129148814"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "18381715029731128557"
+      },
+      {
+        "file": ".npmrc",
+        "hash": "1880664178033616490"
+      },
+      {
+        "file": ".nx/cache/cloud/2311.09.8.hotfix7/index.js",
+        "hash": "15966481786630545044"
+      },
+      {
+        "file": ".nx/cache/cloud/2311.09.8.hotfix7/lib/daemon/process-run-end.js",
+        "hash": "4387998712489105129"
+      },
+      {
+        "file": ".nx/cache/cloud/2311.09.8.hotfix7/lib/heartbeat/heartbeat-process.js",
+        "hash": "5633484099946442012"
+      },
+      {
+        "file": ".nx/cache/cloud/2311.09.8.hotfix7/package.json",
+        "hash": "11687418979936424737"
+      },
+      {
+        "file": ".nx/cache/cloud/verify.lock",
+        "hash": "8220163437215949144"
+      },
+      {
+        "file": ".nx/cache/d/daemon.log",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": ".nx/cache/d/server-process.json",
+        "hash": "18441534772016464217"
+      },
+      {
+        "file": ".nx/cache/file-map.json",
+        "hash": "8631681510256979443"
+      },
+      {
+        "file": ".nx/cache/lockfile.hash",
+        "hash": "4329730787011238412"
+      },
+      {
+        "file": ".nx/cache/parsed-lock-file.json",
+        "hash": "5127380259526816132"
+      },
+      {
+        "file": ".nx/cache/project-graph.json",
+        "hash": "2954542638036591031"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "8865097869854018350"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "235626400633494639"
+      },
+      {
+        "file": "README.md",
+        "hash": "6628154517063263467"
+      },
+      {
+        "file": "README_NX.md",
+        "hash": "15998607671520185988"
+      },
+      {
+        "file": "docker-compose.yml",
+        "hash": "5948608446705079896"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "12333515226966617182"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "9430166341120122740"
+      },
+      {
+        "file": "libs/backend/services/README.md",
+        "hash": "3160524036228328309"
+      },
+      {
+        "file": "migrations.json",
+        "hash": "12596351403778889724"
+      },
+      {
+        "file": "nx.json",
+        "hash": "12634317104063445289"
+      },
+      {
+        "file": "package.json",
+        "hash": "16391116289521609775"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "9243432234939134711"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "13531090654244942617"
+      }
+    ],
+    "projectFileMap": {
+      "shared-contracts": [
+        {
+          "file": "libs/shared/contracts/.eslintrc.json",
+          "hash": "12398963952796570856"
+        },
+        {
+          "file": "libs/shared/contracts/README.md",
+          "hash": "18209276518311330529"
+        },
+        {
+          "file": "libs/shared/contracts/jest.config.ts",
+          "hash": "8204382745644119388"
+        },
+        {
+          "file": "libs/shared/contracts/package.json",
+          "hash": "8263720441981692904",
+          "deps": [
+            "npm:tslib"
+          ]
+        },
+        {
+          "file": "libs/shared/contracts/project.json",
+          "hash": "11356238523684917617"
+        },
+        {
+          "file": "libs/shared/contracts/src/index.ts",
+          "hash": "9438499988625481805"
+        },
+        {
+          "file": "libs/shared/contracts/src/lib/product-management/categories/categories.contract.ts",
+          "hash": "17732220757486440950",
+          "deps": [
+            "npm:@ts-rest/core",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "libs/shared/contracts/src/lib/product-management/product-management.contract.ts",
+          "hash": "4379612427596033983",
+          "deps": [
+            "npm:@ts-rest/core"
+          ]
+        },
+        {
+          "file": "libs/shared/contracts/src/lib/product-management/products/products.contract.ts",
+          "hash": "4639621517746735686",
+          "deps": [
+            "npm:@ts-rest/core",
+            "npm:zod",
+            "dynamodb-onetable"
+          ]
+        },
+        {
+          "file": "libs/shared/contracts/src/lib/shared-contracts.ts",
+          "hash": "4249260064611735581",
+          "deps": [
+            "npm:@ts-rest/core"
+          ]
+        },
+        {
+          "file": "libs/shared/contracts/src/lib/user-management/user-management.contract.ts",
+          "hash": "8907818730143986458",
+          "deps": [
+            "npm:@ts-rest/core"
+          ]
+        },
+        {
+          "file": "libs/shared/contracts/src/lib/user-management/users/users.contract.ts",
+          "hash": "6521860648272428086",
+          "deps": [
+            "npm:@ts-rest/core",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "libs/shared/contracts/src/schema/error-response.schema.ts",
+          "hash": "12858838159790054203",
+          "deps": [
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "libs/shared/contracts/src/schema/paginate-query.schema.ts",
+          "hash": "8932093961316901510",
+          "deps": [
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "libs/shared/contracts/tsconfig.json",
+          "hash": "1098465750514412960"
+        },
+        {
+          "file": "libs/shared/contracts/tsconfig.lib.json",
+          "hash": "5554291030212586824"
+        },
+        {
+          "file": "libs/shared/contracts/tsconfig.spec.json",
+          "hash": "9110660443763673899"
+        }
+      ],
+      "user-management": [
+        {
+          "file": "apps/api/user-management/.eslintrc.json",
+          "hash": "9703569748258640057"
+        },
+        {
+          "file": "apps/api/user-management/jest.config.ts",
+          "hash": "12514572692540422669"
+        },
+        {
+          "file": "apps/api/user-management/project.json",
+          "hash": "1244124713399854945"
+        },
+        {
+          "file": "apps/api/user-management/src/app/app.controller.spec.ts",
+          "hash": "9499997688052526633",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/api/user-management/src/app/app.controller.ts",
+          "hash": "9005150069945785676",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/user-management/src/app/app.module.ts",
+          "hash": "1063613229216132364",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core",
+            "npm:nestjs-zod"
+          ]
+        },
+        {
+          "file": "apps/api/user-management/src/app/app.service.spec.ts",
+          "hash": "8587461140686713758",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/api/user-management/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/user-management/src/app/users/users.controller.spec.ts",
+          "hash": "1125871965926193611",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/api/user-management/src/app/users/users.controller.ts",
+          "hash": "11297749268680662998",
+          "deps": [
+            "npm:@nestjs/common",
+            "shared-contracts",
+            "npm:@ts-rest/nest",
+            "backend-service-users"
+          ]
+        },
+        {
+          "file": "apps/api/user-management/src/app/users/users.module.ts",
+          "hash": "10235703160716252068",
+          "deps": [
+            "npm:@nestjs/common",
+            "backend-service-users"
+          ]
+        },
+        {
+          "file": "apps/api/user-management/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/api/user-management/src/main.ts",
+          "hash": "3149512455955445970",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core",
+            "npm:@nestjs/swagger",
+            "shared-contracts",
+            "npm:@ts-rest/open-api"
+          ]
+        },
+        {
+          "file": "apps/api/user-management/tsconfig.app.json",
+          "hash": "17625342078775932124"
+        },
+        {
+          "file": "apps/api/user-management/tsconfig.json",
+          "hash": "14785519187273610601"
+        },
+        {
+          "file": "apps/api/user-management/tsconfig.spec.json",
+          "hash": "9110660443763673899"
+        },
+        {
+          "file": "apps/api/user-management/webpack.config.js",
+          "hash": "10619490397189790225",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "shared-dto": [
+        {
+          "file": "libs/shared/dto/.eslintrc.json",
+          "hash": "12398963952796570856"
+        },
+        {
+          "file": "libs/shared/dto/README.md",
+          "hash": "6245871760667090816"
+        },
+        {
+          "file": "libs/shared/dto/jest.config.ts",
+          "hash": "3165901426308548907"
+        },
+        {
+          "file": "libs/shared/dto/package.json",
+          "hash": "13659593606395844760",
+          "deps": [
+            "npm:tslib"
+          ]
+        },
+        {
+          "file": "libs/shared/dto/project.json",
+          "hash": "3409471160813220864"
+        },
+        {
+          "file": "libs/shared/dto/src/index.ts",
+          "hash": "11185362154138196042"
+        },
+        {
+          "file": "libs/shared/dto/src/lib/shared-dto.spec.ts",
+          "hash": "13036931150186697107"
+        },
+        {
+          "file": "libs/shared/dto/src/lib/shared-dto.ts",
+          "hash": "5838217550066951319"
+        },
+        {
+          "file": "libs/shared/dto/tsconfig.json",
+          "hash": "1098465750514412960"
+        },
+        {
+          "file": "libs/shared/dto/tsconfig.lib.json",
+          "hash": "5554291030212586824"
+        },
+        {
+          "file": "libs/shared/dto/tsconfig.spec.json",
+          "hash": "9110660443763673899"
+        }
+      ],
+      "backend-service-products": [
+        {
+          "file": "libs/backend/services/products/.eslintrc.json",
+          "hash": "15754961097349354736"
+        },
+        {
+          "file": "libs/backend/services/products/README.md",
+          "hash": "519056869789994264"
+        },
+        {
+          "file": "libs/backend/services/products/jest.config.ts",
+          "hash": "2660196187352934286"
+        },
+        {
+          "file": "libs/backend/services/products/project.json",
+          "hash": "11357279285961809359"
+        },
+        {
+          "file": "libs/backend/services/products/src/index.ts",
+          "hash": "4978261257853866055"
+        },
+        {
+          "file": "libs/backend/services/products/src/lib/backend-service-products.module.ts",
+          "hash": "1876018962450453060",
+          "deps": [
+            "npm:@nestjs/common",
+            "dynamodb-onetable"
+          ]
+        },
+        {
+          "file": "libs/backend/services/products/src/lib/backend-service-products.service.spec.ts",
+          "hash": "11925771572253496843"
+        },
+        {
+          "file": "libs/backend/services/products/src/lib/backend-service-products.service.ts",
+          "hash": "1283427374235590891",
+          "deps": [
+            "npm:@nestjs/common",
+            "dynamodb-onetable",
+            "shared-contracts"
+          ]
+        },
+        {
+          "file": "libs/backend/services/products/tsconfig.json",
+          "hash": "9584156853704587869"
+        },
+        {
+          "file": "libs/backend/services/products/tsconfig.lib.json",
+          "hash": "8122501378292448260"
+        },
+        {
+          "file": "libs/backend/services/products/tsconfig.spec.json",
+          "hash": "12676338339107966475"
+        }
+      ],
+      "backend-service-users": [
+        {
+          "file": "libs/backend/services/users/.eslintrc.json",
+          "hash": "15754961097349354736"
+        },
+        {
+          "file": "libs/backend/services/users/README.md",
+          "hash": "889215064859408793"
+        },
+        {
+          "file": "libs/backend/services/users/jest.config.ts",
+          "hash": "18377961717769135055"
+        },
+        {
+          "file": "libs/backend/services/users/project.json",
+          "hash": "4716666449636273186"
+        },
+        {
+          "file": "libs/backend/services/users/src/index.ts",
+          "hash": "4373407462793238661"
+        },
+        {
+          "file": "libs/backend/services/users/src/lib/backend-service-users.module.ts",
+          "hash": "13356736106567411169",
+          "deps": [
+            "npm:@nestjs/common",
+            "dynamodb-onetable"
+          ]
+        },
+        {
+          "file": "libs/backend/services/users/src/lib/backend-service-users.service.ts",
+          "hash": "15964494853971191446",
+          "deps": [
+            "npm:@nestjs/common",
+            "dynamodb-onetable",
+            "shared-contracts"
+          ]
+        },
+        {
+          "file": "libs/backend/services/users/tsconfig.json",
+          "hash": "9584156853704587869"
+        },
+        {
+          "file": "libs/backend/services/users/tsconfig.lib.json",
+          "hash": "8122501378292448260"
+        },
+        {
+          "file": "libs/backend/services/users/tsconfig.spec.json",
+          "hash": "12676338339107966475"
+        }
+      ],
+      "backend-service-categories": [
+        {
+          "file": "libs/backend/services/categories/.eslintrc.json",
+          "hash": "15754961097349354736"
+        },
+        {
+          "file": "libs/backend/services/categories/README.md",
+          "hash": "16624779982470064877"
+        },
+        {
+          "file": "libs/backend/services/categories/jest.config.ts",
+          "hash": "16379798589997885488"
+        },
+        {
+          "file": "libs/backend/services/categories/project.json",
+          "hash": "1098340051927932918"
+        },
+        {
+          "file": "libs/backend/services/categories/src/index.ts",
+          "hash": "6898006849192459430"
+        },
+        {
+          "file": "libs/backend/services/categories/src/lib/backend-service-categories.module.ts",
+          "hash": "15740797201480437699",
+          "deps": [
+            "npm:@nestjs/common",
+            "dynamodb-onetable"
+          ]
+        },
+        {
+          "file": "libs/backend/services/categories/src/lib/backend-service-categories.service.ts",
+          "hash": "1083390849441513149",
+          "deps": [
+            "npm:@nestjs/common",
+            "dynamodb-onetable",
+            "shared-contracts"
+          ]
+        },
+        {
+          "file": "libs/backend/services/categories/tsconfig.json",
+          "hash": "9584156853704587869"
+        },
+        {
+          "file": "libs/backend/services/categories/tsconfig.lib.json",
+          "hash": "8122501378292448260"
+        },
+        {
+          "file": "libs/backend/services/categories/tsconfig.spec.json",
+          "hash": "12676338339107966475"
+        }
+      ],
+      "dynamodb-onetable": [
+        {
+          "file": "libs/backend/dynamodb-onetable/.eslintrc.json",
+          "hash": "12398963952796570856"
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/README.md",
+          "hash": "14486865825663767519"
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/jest.config.ts",
+          "hash": "17290535631697220810"
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/package.json",
+          "hash": "9748143959851606446",
+          "deps": [
+            "npm:tslib"
+          ]
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/project.json",
+          "hash": "14636695064571221276"
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/src/index.ts",
+          "hash": "9072936421337927355"
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/src/lib/dynamodb-onetable.module.ts",
+          "hash": "6987139425088268817",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/src/lib/dynamodb-onetable.schema.ts",
+          "hash": "14381032868524453129"
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/src/lib/dynamodb-onetable.service.ts",
+          "hash": "14055212205905834710",
+          "deps": [
+            "npm:@aws-sdk/client-dynamodb",
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:dynamodb-onetable"
+          ]
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/src/lib/dynamodb-options.utils.ts",
+          "hash": "597015829553950821",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/tsconfig.json",
+          "hash": "1098465750514412960"
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/tsconfig.lib.json",
+          "hash": "2198184121120557529"
+        },
+        {
+          "file": "libs/backend/dynamodb-onetable/tsconfig.spec.json",
+          "hash": "9110660443763673899"
+        }
+      ],
+      "admin-app": [
+        {
+          "file": "apps/admin-app/.eslintrc.json",
+          "hash": "1353576970768538411"
+        },
+        {
+          "file": "apps/admin-app/app/api/categories.ts",
+          "hash": "13589014201896036081",
+          "deps": [
+            "npm:@ts-rest/core",
+            "shared-contracts"
+          ]
+        },
+        {
+          "file": "apps/admin-app/app/api/hello/route.ts",
+          "hash": "495073956729887886"
+        },
+        {
+          "file": "apps/admin-app/app/api/products.ts",
+          "hash": "4134155931864749521",
+          "deps": [
+            "npm:@ts-rest/core",
+            "shared-contracts"
+          ]
+        },
+        {
+          "file": "apps/admin-app/app/api/users.ts",
+          "hash": "8836744597673229301",
+          "deps": [
+            "npm:@ts-rest/core",
+            "shared-contracts"
+          ]
+        },
+        {
+          "file": "apps/admin-app/app/global.css",
+          "hash": "10943017421299445298"
+        },
+        {
+          "file": "apps/admin-app/app/layout.tsx",
+          "hash": "15352344234334837099"
+        },
+        {
+          "file": "apps/admin-app/app/page.module.css",
+          "hash": "4786619528779355986"
+        },
+        {
+          "file": "apps/admin-app/app/page.tsx",
+          "hash": "18050050879442260861"
+        },
+        {
+          "file": "apps/admin-app/index.d.ts",
+          "hash": "5498222895072842432"
+        },
+        {
+          "file": "apps/admin-app/jest.config.ts",
+          "hash": "2200833653251197196"
+        },
+        {
+          "file": "apps/admin-app/next-env.d.ts",
+          "hash": "5909181270615354023"
+        },
+        {
+          "file": "apps/admin-app/next.config.js",
+          "hash": "17252635002163063865",
+          "deps": [
+            "npm:@nx/next"
+          ]
+        },
+        {
+          "file": "apps/admin-app/project.json",
+          "hash": "4172572321017641524"
+        },
+        {
+          "file": "apps/admin-app/public/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/admin-app/public/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/admin-app/tsconfig.json",
+          "hash": "12303118002252819631"
+        },
+        {
+          "file": "apps/admin-app/tsconfig.spec.json",
+          "hash": "6922413205408300107"
+        },
+        {
+          "file": "apps/admin-app/tsconfig.tsbuildinfo",
+          "hash": "5459644933857242685"
+        }
+      ],
+      "product-management": [
+        {
+          "file": "apps/api/product-management/.eslintrc.json",
+          "hash": "9703569748258640057"
+        },
+        {
+          "file": "apps/api/product-management/jest.config.ts",
+          "hash": "16435630399248793515"
+        },
+        {
+          "file": "apps/api/product-management/project.json",
+          "hash": "629897174607834747"
+        },
+        {
+          "file": "apps/api/product-management/src/app/app.controller.spec.ts",
+          "hash": "9499997688052526633",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/src/app/app.controller.ts",
+          "hash": "9005150069945785676",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/src/app/app.module.ts",
+          "hash": "11677661347596550998",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core",
+            "npm:nestjs-zod"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/src/app/app.service.spec.ts",
+          "hash": "8587461140686713758",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/src/app/categories/categories.controller.spec.ts",
+          "hash": "16497821315399923843",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/src/app/categories/categories.controller.ts",
+          "hash": "2723971993820076086",
+          "deps": [
+            "npm:@nestjs/common",
+            "shared-contracts",
+            "npm:@ts-rest/nest",
+            "backend-service-categories"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/src/app/categories/categories.module.ts",
+          "hash": "14134219580774397902",
+          "deps": [
+            "npm:@nestjs/common",
+            "backend-service-categories"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/src/app/products/products.controller.spec.ts",
+          "hash": "12200897313703537838",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/src/app/products/products.controller.ts",
+          "hash": "3181166115045970909",
+          "deps": [
+            "npm:@nestjs/common",
+            "shared-contracts",
+            "npm:@ts-rest/nest",
+            "backend-service-products"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/src/app/products/products.module.ts",
+          "hash": "10912056069986281891",
+          "deps": [
+            "npm:@nestjs/common",
+            "backend-service-products"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/api/product-management/src/main.ts",
+          "hash": "14138901598158036020",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core",
+            "npm:@nestjs/swagger",
+            "shared-contracts",
+            "npm:@ts-rest/open-api"
+          ]
+        },
+        {
+          "file": "apps/api/product-management/tsconfig.app.json",
+          "hash": "17625342078775932124"
+        },
+        {
+          "file": "apps/api/product-management/tsconfig.json",
+          "hash": "14785519187273610601"
+        },
+        {
+          "file": "apps/api/product-management/tsconfig.spec.json",
+          "hash": "9110660443763673899"
+        },
+        {
+          "file": "apps/api/product-management/webpack.config.js",
+          "hash": "10619490397189790225",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ]
+    }
+  }
+}

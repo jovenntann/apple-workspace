@@ -1,0 +1,48 @@
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 43.6 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (de91571cca00d040)
+[1m[31mDebugger listening on ws://localhost:9229/e59d1857-00a6-4ae3-a2a6-9f19e7cf919c[39m[22m
+[1m[31mDebugger listening on ws://localhost:9229/e59d1857-00a6-4ae3-a2a6-9f19e7cf919c[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 43.6 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (ef9aec3d5fb800a8)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 43.6 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (7ed3c686f2dac6f2)
+[1m[31mStarting inspector on localhost:9229 failed: address already in use[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 57611  - [39m[31m11/28/2023, 3:42:05 AM [31m  ERROR[39m[31m [38;5;3m[NestApplication] [39m[31m[31mError: listen EADDRINUSE: address already in use :::3000[39m[31m[38;5;3m +1ms[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mError: listen EADDRINUSE: address already in use :::3000[39m[22m
+[1m[31m    at Server.setupListenHandle [as _listen2] (node:net:1740:16)[39m[22m
+[1m[31m    at listenInCluster (node:net:1788:12)[39m[22m
+[1m[31m    at Server.listen (node:net:1876:7)[39m[22m
+[1m[31m    at ExpressAdapter.listen (/Users/joventan/Documents/01-Github/03-Personal/gitkraken/apple-workspace/node_modules/.pnpm/@nestjs+platform-express@10.2.4_@nestjs+common@10.2.4_@nestjs+core@10.2.4/node_modules/@nestjs/platform-express/adapters/express-adapter.js:88:32)[39m[22m
+[1m[31m    at /Users/joventan/Documents/01-Github/03-Personal/gitkraken/apple-workspace/node_modules/.pnpm/@nestjs+core@10.2.4_@nestjs+common@10.2.4_@nestjs+platform-express@10.2.4_reflect-metadata@0.1.13_rxjs@7.8.1/node_modules/@nestjs/core/nest-application.js:180:30[39m[22m
+[1m[31m    at new Promise (<anonymous>)[39m[22m
+[1m[31m    at NestApplication.listen (/Users/joventan/Documents/01-Github/03-Personal/gitkraken/apple-workspace/node_modules/.pnpm/@nestjs+core@10.2.4_@nestjs+common@10.2.4_@nestjs+platform-express@10.2.4_reflect-metadata@0.1.13_rxjs@7.8.1/node_modules/@nestjs/core/nest-application.js:170:16)[39m[22m
+[1m[31m    at bootstrap (/Users/joventan/Documents/01-Github/03-Personal/gitkraken/apple-workspace/dist/apps/api/product-management/webpack:/src/main.ts:35:3)[39m[22m
+[1m[31m[39m[22m
+
+[36m>[39m [7m[1m[36m NX [39m[22m[27m [1mProcess exited with code 1, waiting for changes to restart...[22m
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 43.6 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (7ed3c686f2dac6f2)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 43.6 KiB [1m[33m[entry][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (7ed3c686f2dac6f2)
+[1m[31mStarting inspector on localhost:9229 failed: address already in use[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 57639  - [39m[31m11/28/2023, 3:42:08 AM [31m  ERROR[39m[31m [38;5;3m[NestApplication] [39m[31m[31mError: listen EADDRINUSE: address already in use :::3000[39m[31m[38;5;3m +1ms[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mError: listen EADDRINUSE: address already in use :::3000[39m[22m
+[1m[31m    at Server.setupListenHandle [as _listen2] (node:net:1740:16)[39m[22m
+[1m[31m    at listenInCluster (node:net:1788:12)[39m[22m
+[1m[31m    at Server.listen (node:net:1876:7)[39m[22m
+[1m[31m    at ExpressAdapter.listen (/Users/joventan/Documents/01-Github/03-Personal/gitkraken/apple-workspace/node_modules/.pnpm/@nestjs+platform-express@10.2.4_@nestjs+common@10.2.4_@nestjs+core@10.2.4/node_modules/@nestjs/platform-express/adapters/express-adapter.js:88:32)[39m[22m
+[1m[31m    at /Users/joventan/Documents/01-Github/03-Personal/gitkraken/apple-workspace/node_modules/.pnpm/@nestjs+core@10.2.4_@nestjs+common@10.2.4_@nestjs+platform-express@10.2.4_reflect-metadata@0.1.13_rxjs@7.8.1/node_modules/@nestjs/core/nest-application.js:180:30[39m[22m
+[1m[31m    at new Promise (<anonymous>)[39m[22m
+[1m[31m    at NestApplication.listen (/Users/joventan/Documents/01-Github/03-Personal/gitkraken/apple-workspace/node_modules/.pnpm/@nestjs+core@10.2.4_@nestjs+common@10.2.4_@nestjs+platform-express@10.2.4_reflect-metadata@0.1.13_rxjs@7.8.1/node_modules/@nestjs/core/nest-application.js:170:16)[39m[22m
+[1m[31m    at bootstrap (/Users/joventan/Documents/01-Github/03-Personal/gitkraken/apple-workspace/dist/apps/api/product-management/webpack:/src/main.ts:35:3)[39m[22m
+[1m[31m[39m[22m
+
+[36m>[39m [7m[1m[36m NX [39m[22m[27m [1mProcess exited with code 1, waiting for changes to restart...[22m
+
